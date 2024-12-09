@@ -1,0 +1,7 @@
+export * from './HomePage'
+export * from './Login'
+export * from './Profile'
+export * from './Authors'
+export * from './Posts'
+export * from './Tags'
+export * from './NotFoundPage'
