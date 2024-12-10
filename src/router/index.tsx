@@ -1,14 +1,18 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { LayoutApp } from "../components";
 import { RequiredAuth } from "../hoc/RequiredAuth";
-import { Authors, HomePage, Login, NotFoundPage, Posts, Profile, Tags } from "../pages";
+import { Authors, HomePage, Login, NotFoundPage, Posts, Profile, Tags, WelcomePage } from "../pages";
 
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<LayoutApp />}>
-      <Route 
+      <Route
         index
+        element={<WelcomePage />}
+      />
+      <Route 
+        path="home"
         element={
           <RequiredAuth>
             <HomePage />

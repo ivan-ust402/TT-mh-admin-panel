@@ -1,3 +1,4 @@
+export * from './WelcomePage'
 export * from './HomePage'
 export * from './Login'
 export * from './Profile'
