@@ -28,7 +28,7 @@ export const router = createBrowserRouter(
         }
       />
       <Route 
-        path="post"
+        path="posts"
         element={
           <RequiredAuth>
             <Posts />
