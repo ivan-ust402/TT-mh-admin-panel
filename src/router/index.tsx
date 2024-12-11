@@ -1,7 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { LayoutApp } from "../components";
 import { RequiredAuth } from "../hoc/RequiredAuth";
-import { Authors, HomePage, Login, NotFoundPage, Posts, Profile, Tags, WelcomePage } from "../pages";
+import { Authors, HomePage, Login, NotFoundPage, Posts, Profile, Tags } from "../pages";
 
 
 export const router = createBrowserRouter(
@@ -9,15 +9,7 @@ export const router = createBrowserRouter(
     <Route path="/" element={<LayoutApp />}>
       <Route
         index
-        element={<WelcomePage />}
-      />
-      <Route 
-        path="home"
-        element={
-          <RequiredAuth>
-            <HomePage />
-          </RequiredAuth>
-        }
+        element={<HomePage />}
       />
       <Route 
         path="profile"
@@ -51,7 +43,7 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route path="login" element={<Login />}/>
+      <Route path="/login" element={<Login />}/>
       <Route path="*" element={<NotFoundPage />} />
     </Route>
     

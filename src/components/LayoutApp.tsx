@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Layout, Menu, MenuProps } from 'antd'
-import { NavLink, Outlet } from 'react-router-dom'
+import { Button, Layout, Menu, MenuProps } from 'antd'
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { HomeOutlined, LaptopOutlined, UserOutlined } from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
 import { useAuth } from '../hooks/useAuth'
@@ -37,13 +37,23 @@ const items2: MenuProps['items'] = [
 
 export const LayoutApp = () => {
   const { isAuth } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const fromPage = location.state?.from?.pathname || '/'
+
   const [selectedKey, setSelectedKey] = useState<string>('')
-  
+
+  const handleLogOut = () => {
+    // dispatch(removeUser())
+    console.log(111)
+    navigate("/", { replace: true })
+  }
+
   const handleHomeClick = () => {
     setSelectedKey('')
   }
 
-  const handleMenuClick = (e: { key: string}) => {
+  const handleMenuClick = (e: { key: string }) => {
     setSelectedKey(e.key);
   }
 
@@ -58,7 +68,8 @@ export const LayoutApp = () => {
           display: 'flex',
           columnGap: '10px',
           justifyContent: 'space-between',
-          width: '100%'
+          width: '100%',
+          alignItems: 'center'
         }}
       >
         <NavLink to={'/'}
@@ -76,6 +87,29 @@ export const LayoutApp = () => {
             }}
           />
         </NavLink>
+        {
+          isAuth
+            ? <Button
+              type='default'
+              onClick={handleLogOut}
+            >
+              Log Out
+            </Button>
+            : <Link
+              to={'/login'}
+              state={{ from: fromPage }}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+              onClick={handleHomeClick}
+            >
+              <Button type='default' >
+                Log In
+              </Button>
+            </Link>
+        }
       </Header>
       <Layout>
         {
@@ -83,12 +117,12 @@ export const LayoutApp = () => {
             <Sider
               breakpoint="lg"
               collapsedWidth="50px"
-              onBreakpoint={broken => {
-                console.log(broken);
-              }}
-              onCollapse={(collapsed, type) => {
-                console.log(collapsed, type);
-              }}
+              // onBreakpoint={broken => {
+              //   console.log(broken);
+              // }}
+              // onCollapse={(collapsed, type) => {
+              //   console.log(collapsed, type);
+              // }}
               theme='dark'
               className="rerere"
             >

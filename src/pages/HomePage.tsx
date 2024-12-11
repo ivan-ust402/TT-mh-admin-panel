@@ -1,11 +1,14 @@
 import { Typography } from 'antd'
 import React from 'react'
+import { useAuth } from '../hooks/useAuth'
+import { Link } from 'react-router-dom'
 
-const {Title, Text} = Typography
+const { Title, Text } = Typography
 
 type Props = {}
 
 export const HomePage = (props: Props) => {
+  const { isAuth, userName } = useAuth()
   return (
     <div
       style={{
@@ -16,10 +19,27 @@ export const HomePage = (props: Props) => {
         minHeight: 'calc(100vh - 128px)'
       }}
     >
-      <Title level={2}>Home</Title>
-      <Text>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore magnam vel facilis a debitis perferendis consequatur doloremque blanditiis, vitae, ut consectetur omnis. Nam ullam sint, odio accusantium rem velit dolor amet laborum.
-      </Text>
+      {
+        isAuth
+          ? <Title level={2}>Welcome {userName ? userName : ''} in your account!</Title>
+          : <>
+            <Title level={2}>
+              Welcome in our App!
+            </Title>
+            <Text>
+              To use the functionality,&nbsp;
+              <Link to="/login"
+                style={{
+                  textDecoration: 'underline',
+                  color: 'inherit'
+                }}
+              >
+                log in
+              </Link>
+            </Text>
+          </>
+      }
+
     </div>
   )
 }
