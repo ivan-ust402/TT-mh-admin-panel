@@ -1,1 +1,1 @@
-export * from './LayoutApp/LayoutApp'
+export * from './LayoutApp'

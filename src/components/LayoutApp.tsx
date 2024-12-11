@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout, Menu, MenuProps } from 'antd'
 import { NavLink, Outlet } from 'react-router-dom'
 import { HomeOutlined, LaptopOutlined, UserOutlined } from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth } from '../hooks/useAuth'
 
 const { Header, Footer, Content } = Layout
 
@@ -33,13 +33,20 @@ const items2: MenuProps['items'] = [
     ]
   }]
 
-  const handleHomeClick = () => {
-
-  }
 
 
 export const LayoutApp = () => {
-  const {isAuth} = useAuth()
+  const { isAuth } = useAuth()
+  const [selectedKey, setSelectedKey] = useState<string>('')
+  
+  const handleHomeClick = () => {
+    setSelectedKey('')
+  }
+
+  const handleMenuClick = (e: { key: string}) => {
+    setSelectedKey(e.key);
+  }
+
   return (
     <Layout
       style={{
@@ -72,28 +79,29 @@ export const LayoutApp = () => {
       </Header>
       <Layout>
         {
-        isAuth ? 
-        <Sider
-          breakpoint="lg"
-          collapsedWidth="50px"
-          onBreakpoint={broken => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
-          theme='dark'
-          className="rerere"
-        >
-          <Menu
-            theme="dark"
-            mode="inline"
-            items={items2}
-            onClick={(e) => {console.log(e)}}
-          />
-          
-        </Sider>
-        : ''
+          isAuth ?
+            <Sider
+              breakpoint="lg"
+              collapsedWidth="50px"
+              onBreakpoint={broken => {
+                console.log(broken);
+              }}
+              onCollapse={(collapsed, type) => {
+                console.log(collapsed, type);
+              }}
+              theme='dark'
+              className="rerere"
+            >
+              <Menu
+                theme="dark"
+                mode="inline"
+                items={items2}
+                selectedKeys={[selectedKey]}
+                onClick={handleMenuClick}
+              />
+
+            </Sider>
+            : ''
         }
         <Layout>
           <Content
