@@ -1,5 +1,5 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
-import { Card, Col, Pagination, Row, Typography } from 'antd'
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, Card, Col, Pagination, Row, Typography } from 'antd'
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
@@ -201,7 +201,29 @@ export const Posts = () => {
 
       }}
     >
-      <Title level={2}>Posts</Title>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 5,
+          width: '100%',
+          maxWidth: '880px',
+        }}
+      >
+        <Title
+          level={2}
+          style={{
+            marginBottom: 0,
+          }}
+        >Posts</Title>
+        <Link to={'add'}>
+          <Button type='primary'>
+            <PlusOutlined />
+            Add Post
+          </Button>
+        </Link>
+      </div>
       <Row
         gutter={[16, 16]}
         style={{
@@ -211,15 +233,15 @@ export const Posts = () => {
         {posts.map((post, index) => (
           <Col key={index}>
             <Link to={`${post.id}`} state={location}>
-            <Card
-              style={{
-                width: 300,
-                height: 350,
-                position: 'relative'
-              }}
-              cover={
-                <>
-                  
+              <Card
+                style={{
+                  width: 300,
+                  height: 350,
+                  position: 'relative'
+                }}
+                cover={
+                  <>
+
                     <img
                       alt="card cover"
                       src={post.previewPicture.url}
@@ -228,49 +250,48 @@ export const Posts = () => {
                         objectFit: 'cover'
                       }}
                     />
-                  <div style={{
-                    position: 'absolute',
-                    top: '0',
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '5px',
-                    padding: 10,
-                  }}>
-                    {post.tagNames.map((tag, index) => {
-                      return (
-                        <div
-                          style={{
-                            padding: '10px',
-                            backgroundColor: '#eee',
-                            width: 'fit-content',
-                            border: '1px solid #ddd',
-                            borderRadius: '5px',
-                            opacity: 0.8
-                          }}
-                          key={index}
-                        >{tag}</div>
-                      )
-                    })}
-                  </div>
-                </>
-              }
-              actions={[
-                <EditOutlined
-                  key="edit"
-                  onClick={(e) => editPostHandler(e, post.id)}
-
-                />,
-                <DeleteOutlined key="delete"
-                  onClick={deletePostHandler}
-                />,
-              ]}
-              hoverable
-            >
-              <Meta
-                title={post.title}
-                description={post.authorName}
-              />
-            </Card>
+                    <div style={{
+                      position: 'absolute',
+                      top: '0',
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '5px',
+                      padding: 10,
+                    }}>
+                      {post.tagNames.map((tag, index) => {
+                        return (
+                          <div
+                            style={{
+                              padding: '10px',
+                              backgroundColor: '#eee',
+                              width: 'fit-content',
+                              border: '1px solid #ddd',
+                              borderRadius: '5px',
+                              opacity: 0.8
+                            }}
+                            key={index}
+                          >{tag}</div>
+                        )
+                      })}
+                    </div>
+                  </>
+                }
+                actions={[
+                  <EditOutlined
+                    key="edit"
+                    onClick={(e) => editPostHandler(e, post.id)}
+                  />,
+                  <DeleteOutlined key="delete"
+                    onClick={deletePostHandler}
+                  />,
+                ]}
+                hoverable
+              >
+                <Meta
+                  title={post.title}
+                  description={post.authorName}
+                />
+              </Card>
             </Link>
           </Col>
         ))}

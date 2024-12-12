@@ -1,9 +1,9 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
-import { LayoutApp } from "../components";
-import { RequiredAuth } from "../hoc/RequiredAuth";
-import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from "../pages";
-import { PostEdit } from "../pages/PostEdit";
-import { PostAdd } from "../pages/PostAdd";
+import { LayoutApp } from "src/components";
+import { RequiredAuth } from "src/hoc/RequiredAuth";
+import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from "src/pages";
+import { PostEdit } from "src/pages/PostEdit";
+import { PostAdd } from "src/pages/PostAdd";
 
 
 export const router = createBrowserRouter(

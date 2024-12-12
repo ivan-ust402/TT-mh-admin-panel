@@ -3,7 +3,7 @@ import { Button, Layout, Menu, MenuProps } from 'antd'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { HomeOutlined, LaptopOutlined, UserOutlined } from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from 'src/hooks/useAuth'
 
 const { Header, Footer, Content } = Layout
 
