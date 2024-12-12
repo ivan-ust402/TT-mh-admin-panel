@@ -1,7 +1,9 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { LayoutApp } from "../components";
 import { RequiredAuth } from "../hoc/RequiredAuth";
-import { Authors, HomePage, Login, NotFoundPage, Posts, Profile, Tags } from "../pages";
+import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from "../pages";
+import { PostEdit } from "../pages/PostEdit";
+import { PostAdd } from "../pages/PostAdd";
 
 
 export const router = createBrowserRouter(
@@ -24,6 +26,30 @@ export const router = createBrowserRouter(
         element={
           <RequiredAuth>
             <Posts />
+          </RequiredAuth>
+        }
+      />
+      <Route 
+        path="posts/:id"
+        element={
+          <RequiredAuth>
+            <PostDetails />
+          </RequiredAuth>
+        }
+      />
+      <Route 
+        path="posts/:id/edit"
+        element={
+          <RequiredAuth>
+            <PostEdit />
+          </RequiredAuth>
+        }
+      />
+      <Route 
+        path="posts/:id/add"
+        element={
+          <RequiredAuth>
+            <PostAdd />
           </RequiredAuth>
         }
       />

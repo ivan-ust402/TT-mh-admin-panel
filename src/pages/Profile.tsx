@@ -1,7 +1,7 @@
 import { Badge, Descriptions, Typography } from 'antd'
 import React from 'react'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 type Props = {}
 type ProfileRole = {
