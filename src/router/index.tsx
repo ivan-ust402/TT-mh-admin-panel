@@ -46,7 +46,7 @@ export const router = createBrowserRouter(
         }
       />
       <Route 
-        path="posts/:id/add"
+        path="posts/add"
         element={
           <RequiredAuth>
             <PostAdd />

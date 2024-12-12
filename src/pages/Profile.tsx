@@ -14,11 +14,11 @@ type ProfileStatus = {
 }
 type ProfileInfo = {
   id: number,
-  phone: string,
+  phone: string | null,
   email: string,
-  name: string,
-  lastName: string,
-  secondName: string,
+  name: string | null,
+  lastName: string | null,
+  secondName: string | null,
   roles: ProfileRole[],
   status: ProfileStatus,
   isActive: boolean,
@@ -26,34 +26,29 @@ type ProfileInfo = {
   createdAt: string
 }
 
-const profileInfo: ProfileInfo = {
-  id: 0,
-  phone: '444',
-  email: '2@2.ru',
-  // email: false,
-  name: 'Ivan',
-  lastName: 'Ivanov',
-  secondName: 'Ivanovich',
-  roles: [
-    {
-      role: 'admin',
-      name: 'admin'
-    },
-    {
-      role: 'editor',
-      name: 'editor'
-    }
-  ],
-  status: {
-    code: 0,
-    name: 'confirmed'
-  },
-  isActive: true,
-  updatedAt: "2019-08-24T14:15:22Z",
-  createdAt: "2019-08-24T14:15:22Z"
-}
-
 export const Profile = (props: Props) => {
+  const profileInfo: ProfileInfo = {
+    id: 1,
+    phone: null,
+    email: "test@test.ru",
+    name: "Ivan",
+    lastName: null,
+    secondName: null,
+    roles: [
+      {
+        role: "admin",
+        name: "Админ"
+      }
+    ],
+    status: {
+      code: 10,
+      name: "Активен"
+    },
+    isActive: true,
+    updatedAt: "2021-05-27T08:24:07+03:00",
+    createdAt: "2021-05-27T08:24:07+03:00"
+  }
+
   const dateFormatter = (isoDate: string) => {
     const date = new Date(isoDate);
 
@@ -68,6 +63,7 @@ export const Profile = (props: Props) => {
 
     return formattedDate
   }
+  
   return (
     <div
       style={{
@@ -79,13 +75,12 @@ export const Profile = (props: Props) => {
         width: '100%',
       }}
     >
-      {/*  */}
       <Descriptions title={<Title level={2} style={{
         display: 'flex',
         alignItems: 'center',
         gap: '10px'
       }}>Profile&nbsp; {profileInfo.isActive ? <Badge status="processing" /> : ''}</Title>} bordered column={1} >
-        
+
         <Descriptions.Item label="Name">
           {profileInfo.name}
         </Descriptions.Item>
@@ -105,7 +100,7 @@ export const Profile = (props: Props) => {
           {profileInfo.status.name}
         </Descriptions.Item>
         <Descriptions.Item label="Roles">
-          {profileInfo.roles.map((role, index) => <Descriptions.Item key={index}><Badge status="success" text={role.name} /><br /></Descriptions.Item>
+          {profileInfo.roles.map((item, index) => <Descriptions.Item key={index}><Badge status="success" text={item.name} /><br /></Descriptions.Item>
           )}
         </Descriptions.Item>
         <Descriptions.Item label="Profile created at">
