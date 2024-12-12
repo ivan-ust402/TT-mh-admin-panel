@@ -3,7 +3,9 @@ import { Button, Layout, Menu, MenuProps } from 'antd'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { HomeOutlined, LaptopOutlined, UserOutlined } from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
-import { useAuth } from 'src/hooks/useAuth'
+import { useAuth } from '../hooks/useAuth'
+import { useDispatch } from 'react-redux'
+import { logoutRequest } from 'src/store/auth/authActions'
 
 const { Header, Footer, Content } = Layout
 
@@ -39,13 +41,13 @@ export const LayoutApp = () => {
   const { isAuth } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useDispatch()
   const fromPage = location.state?.from?.pathname || '/'
 
   const [selectedKey, setSelectedKey] = useState<string>('')
 
   const handleLogOut = () => {
-    // dispatch(removeUser())
-    console.log(111)
+    dispatch(logoutRequest());
     navigate("/", { replace: true })
   }
 

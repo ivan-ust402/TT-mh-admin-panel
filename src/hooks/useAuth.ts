@@ -1,12 +1,7 @@
+import { useSelector } from "react-redux";
+import { RootState } from "src/store/store";
 
 export function useAuth() {
-  const { acess_token: token, refresh_token, access_expired_at, refresh_expired_at} = {
-    acess_token: 'tete', 
-    refresh_token: 'etet', 
-    access_expired_at: 124, 
-    refresh_expired_at: 124
-  }
-
   const {id, phone, email, name: userName, lastName, secondName, roles, status, isActive, updatedAt, createdAt} = {
     id: 0,
     phone: '444',
@@ -30,11 +25,11 @@ export function useAuth() {
     createdAt: "2019-08-24T14:15:22Z"
   }
 
+  const { isAuthenticated, loading, error } = useSelector((state: RootState) => state.auth);
   return {
-    isAuth: !!email,
-    email, 
-    token,
-    id,
+    isAuth: isAuthenticated,
+    loading,
+    error,
     userName,
   }
 }

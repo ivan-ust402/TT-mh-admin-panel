@@ -1,28 +1,32 @@
 import { Alert, Button, Checkbox, Form, Input, Typography } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from 'src/hooks/useAuth'
+import { loginRequest } from 'src/store/auth/authActions'
 
 const { Title } = Typography
 
 type LoginValues = {
-  "Log In Title": undefined | string,
   email: string,
   password: string,
-  remember: boolean
 }
 
 export const Login = () => {
   const [message, setMessage] = useState('')
   const [typeMessage, setTypeMessage] = useState<"success" | "info" | "warning" | "error" | undefined>(undefined)
+  const dispatch = useDispatch();
+  const {isAuth} = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(isAuth){
+      navigate('/')
+    }
+  }, [isAuth, navigate])
 
   const onFinish = (values: LoginValues) => {
-    console.log('Success:', values);
-    setMessage('success')
-    setTypeMessage('success')
-    setTimeout(() => {
-      setMessage('')
-      setTypeMessage(undefined)
-      console.log(1)
-    }, 3000)
+    dispatch(loginRequest(values));
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -40,6 +44,7 @@ export const Login = () => {
 
       }}
     >
+      <Title level={2}>Log in</Title>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -53,13 +58,10 @@ export const Login = () => {
         }}
       >
 
-        <Form.Item name="Log In title">
-          <Title level={2}>Log In</Title>
-        </Form.Item>
-
         <Form.Item
           label="Email"
           name="email"
+          initialValue={'test@test.ru'}
           rules={[{ required: true, message: 'Please input your email!' }]}
         >
           <Input />
@@ -68,13 +70,10 @@ export const Login = () => {
         <Form.Item
           label="Password"
           name="password"
+          initialValue={'khro2ij3n2730'}
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
           <Input.Password />
-        </Form.Item>
-
-        <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-          <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

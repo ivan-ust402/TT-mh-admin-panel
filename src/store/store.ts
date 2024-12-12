@@ -1,17 +1,24 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import createSagaMiddleware from "redux-saga";
+import authReducer from "./auth/authReducer";
+import {authWatcher} from "./auth/authSaga";
+import { all } from "redux-saga/effects";
 
+const sagaMiddleware = createSagaMiddleware();
 
-
-export const store = configureStore({
-  reducer: {
-  },
+const rootReducer = combineReducers({
+  auth: authReducer,
 });
+
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+function* rootSagas () {
+  yield all([
+    authWatcher()
+  ])
+}
+
+sagaMiddleware.run(rootSagas);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
