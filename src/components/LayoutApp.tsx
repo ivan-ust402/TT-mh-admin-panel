@@ -11,25 +11,25 @@ const { Header, Footer, Content } = Layout
 
 const items2: MenuProps['items'] = [
   {
-    key: `sub1`,
+    key: `profile`,
     icon: React.createElement(UserOutlined),
     label: <NavLink to="profile">Profile</NavLink>,
   },
   {
-    key: `sub2`,
+    key: `manage`,
     icon: React.createElement(LaptopOutlined),
     label: `Manage`,
     children: [
       {
-        key: `subKey1`,
+        key: `posts`,
         label: <NavLink to="posts">Posts</NavLink>,
       },
       {
-        key: `subKey2`,
+        key: `authors`,
         label: <NavLink to="authors">Authors</NavLink>,
       },
       {
-        key: `subKey3`,
+        key: `tags`,
         label: <NavLink to="tags">Tags</NavLink>,
       },
     ]
@@ -43,8 +43,8 @@ export const LayoutApp = () => {
   const location = useLocation()
   const dispatch = useDispatch()
   const fromPage = location.state?.from?.pathname || '/'
-
-  const [selectedKey, setSelectedKey] = useState<string>('')
+  const initialMenuKey = location.pathname.split('').splice(1).join('') 
+  const [selectedKey, setSelectedKey] = useState<string>(initialMenuKey)
 
   const handleLogOut = () => {
     dispatch(logoutRequest());
@@ -56,6 +56,7 @@ export const LayoutApp = () => {
   }
 
   const handleMenuClick = (e: { key: string }) => {
+    console.log(e.key)
     setSelectedKey(e.key);
   }
 
@@ -119,12 +120,6 @@ export const LayoutApp = () => {
             <Sider
               breakpoint="lg"
               collapsedWidth="50px"
-              // onBreakpoint={broken => {
-              //   console.log(broken);
-              // }}
-              // onCollapse={(collapsed, type) => {
-              //   console.log(collapsed, type);
-              // }}
               theme='dark'
               className="rerere"
             >

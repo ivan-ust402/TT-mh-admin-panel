@@ -1,4 +1,4 @@
-import { axiosInstance, makeRequest } from ".";
+import { makeRequest } from ".";
 
 interface ProfileRole  {
   role: string,
@@ -8,7 +8,7 @@ interface ProfileStatus  {
   code: number,
   name: string
 }
-export interface ProfileResponse  {
+export interface GetProfileResponse  {
   id: number,
   phone: string | null,
   email: string,
@@ -22,4 +22,4 @@ export interface ProfileResponse  {
   createdAt: string
 }
 
-export const getProfile = async (): Promise<ProfileResponse> => makeRequest('/profile', 'GET')
+export const getProfile = async (): Promise<GetProfileResponse> => makeRequest('/profile', 'GET')

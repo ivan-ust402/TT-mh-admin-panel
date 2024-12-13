@@ -59,7 +59,6 @@ export const makeRequest = async (url: string, method: "GET" | "POST" | "PUT" | 
       method,
       data,
     });
-    console.log(response.data);
     
     return response.data;
 
@@ -67,3 +66,8 @@ export const makeRequest = async (url: string, method: "GET" | "POST" | "PUT" | 
     console.log(err);
   }
 }
+
+export const makeDelay = (ms: number) =>
+  new Promise((res) => {
+    setTimeout(res, ms)
+})
