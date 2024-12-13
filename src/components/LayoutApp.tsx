@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Layout, Menu, MenuProps } from 'antd'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { HomeOutlined, LaptopOutlined, UserOutlined } from '@ant-design/icons'
@@ -60,6 +60,11 @@ export const LayoutApp = () => {
     setSelectedKey(e.key);
   }
 
+  useEffect(() => {
+    if(!isAuth) {
+      setSelectedKey('')
+    }
+  }, [isAuth])
   return (
     <Layout
       style={{
@@ -130,7 +135,6 @@ export const LayoutApp = () => {
                 selectedKeys={[selectedKey]}
                 onClick={handleMenuClick}
               />
-
             </Sider>
             : ''
         }

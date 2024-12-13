@@ -4,9 +4,10 @@ import { call, put, takeLeading } from "redux-saga/effects";
 import { makeDelay } from "src/api";
 
 
-function* profileSaga(action: GetProfileRequestAction) {
+function* getProfileSaga(action: GetProfileRequestAction) {
   try {
     const response: GetProfileResponse = yield call(getProfile)
+    // Искусственная задерка для отображения состояния loading
     yield makeDelay(500)
     yield put(getProfileSuccess(response))
   } catch (error: any) {
@@ -16,5 +17,5 @@ function* profileSaga(action: GetProfileRequestAction) {
 
 
 export function* profileWatcher() {
-  yield takeLeading(GET_PROFILE_REQUEST, profileSaga);
+  yield takeLeading(GET_PROFILE_REQUEST, getProfileSaga);
 }

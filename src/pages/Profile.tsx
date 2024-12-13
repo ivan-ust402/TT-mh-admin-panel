@@ -15,7 +15,6 @@ export const Profile = () => {
     dispatch(getProfileRequest())
   }, [dispatch])
 
-
   const dateFormatter = (isoDate: string) => {
     const date = new Date(isoDate);
 
@@ -30,8 +29,6 @@ export const Profile = () => {
 
     return formattedDate
   }
-
-  
 
   return (
     <>
