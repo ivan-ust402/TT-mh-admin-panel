@@ -1,13 +1,14 @@
 import axios, { AxiosResponse } from "axios";
-import { LoginResponse } from "src/api/authApi";
+import { AuthRequestBody, LoginResponse } from "src/api/authApi";
 import { logoutRequest } from "src/store/auth/authActions";
 import { store } from "src/store/store";
-import { getAccessToken, getAccessTokenExpiredAt, getRefreshToken, getRefreshTokenExpiredAt, isTokenExpired } from "src/utils/cookies";
+import { getAccessToken, getAccessTokenExpiredAt, getRefreshToken, getRefreshTokenExpiredAt, isTokenExpired, setAuthCookies } from "src/utils/cookies";
+
+type RequestBody = AuthRequestBody 
 
 export const axiosInstance = axios.create({
   baseURL: "https://rest-test.machineheads.ru",
   timeout: 10000,
-  headers: {},
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -17,6 +18,10 @@ axiosInstance.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
+});
+
+axiosInstance.interceptors.response.use((response) => response, error => {
+  return Promise.reject(error?.response?.data || error)  
 });
 
 const checkIfTokenExpired = async () => {
@@ -37,10 +42,7 @@ const checkIfTokenExpired = async () => {
       form.append("refresh_token", getRefreshToken());
       const response: AxiosResponse<LoginResponse> = await axiosInstance.post(`/auth/token-refresh`, form);
 
-      document.cookie = `access_token = ${response.data.access_token}`
-      document.cookie = `access_expired_at = ${response.data.access_expired_at}`
-      document.cookie = `refresh_token = ${response.data.refresh_token}`
-      document.cookie = `refresh_expired_at = ${response.data.refresh_expired_at}`
+      setAuthCookies(response.data)
     }
   } catch (error) {
     console.error('Token error', error);
@@ -49,7 +51,7 @@ const checkIfTokenExpired = async () => {
 
 }
 
-export const makeRequest = async (url: string, method: "GET" | "POST" | "PUT" | "DELETE", data?: any) => {
+export const makeRequest = async (url: string, method: "GET" | "POST" | "PUT" | "DELETE", data?: RequestBody) => {
   try {
     await checkIfTokenExpired()
     const response = await axiosInstance({
@@ -64,5 +66,4 @@ export const makeRequest = async (url: string, method: "GET" | "POST" | "PUT" | 
   } catch (err) {
     console.log(err);
   }
-
 }

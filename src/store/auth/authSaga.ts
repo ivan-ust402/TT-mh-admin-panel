@@ -1,29 +1,22 @@
 import { call, put, takeLeading } from "redux-saga/effects";
 
-import { loginSuccess, loginFailure, LOGIN_REQUEST, AuthActionTypes, LOGOUT_REQUEST, logoutSuccess, logoutFailure } from "./authActions";
+import { loginSuccess, loginFailure, LOGIN_REQUEST, LOGOUT_REQUEST, logoutSuccess, logoutFailure, LoginRequestAction, LogoutRequestAction } from "./authActions";
 import { login, LoginResponse } from "src/api/authApi";
+import { setAuthCookies } from "src/utils/cookies";
 
-function* loginSaga(action: AuthActionTypes) {
-  if (action.type !== LOGIN_REQUEST) return;
+function* loginSaga(action: LoginRequestAction) {
   try {
     const response: LoginResponse = yield call(login, action.payload);
-    document.cookie = `access_token = ${response.access_token}`
-    document.cookie = `access_expired_at = ${response.access_expired_at}`
-    document.cookie = `refresh_token = ${response.refresh_token}`
-    document.cookie = `refresh_expired_at = ${response.refresh_expired_at}`
+    setAuthCookies(response)
     yield put(loginSuccess());
   } catch (error: any) {
     yield put(loginFailure(error.message || "Login failed"));
   }
-}
+} 
 
-function* logoutSaga(action: AuthActionTypes) {
-  if (action.type !== LOGOUT_REQUEST) return;
+function* logoutSaga(action: LogoutRequestAction) {
   try {
-    document.cookie = 'access_token = ';
-    document.cookie = `access_expired_at = `
-    document.cookie = `refresh_token = `
-    document.cookie = `refresh_expired_at = `
+    setAuthCookies()
     yield put(logoutSuccess());
   } catch (error: any) {
     yield put(logoutFailure(error.message || "Logout failed")); 

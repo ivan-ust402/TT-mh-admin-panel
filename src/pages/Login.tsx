@@ -13,10 +13,8 @@ type LoginValues = {
 }
 
 export const Login = () => {
-  const [message, setMessage] = useState('')
-  const [typeMessage, setTypeMessage] = useState<"success" | "info" | "warning" | "error" | undefined>(undefined)
   const dispatch = useDispatch();
-  const {isAuth} = useAuth()
+  const {isAuth, loading, error} = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -77,15 +75,19 @@ export const Login = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button 
+            type="primary" 
+            htmlType="submit"
+            loading={loading}
+          >
             Submit
           </Button>
         </Form.Item>
         {
-          message
+          error
             ? <Alert
-              message={message}
-              type={typeMessage}
+              message={error}
+              type="error"
               showIcon
               style={{
                 position: 'absolute',

@@ -5,6 +5,8 @@ export interface Credentials {
     password: string
 }
 
+export type AuthRequestBody = Credentials
+
 export interface LoginResponse {
     access_token: string,
     refresh_token: string,
