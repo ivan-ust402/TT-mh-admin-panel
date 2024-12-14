@@ -1,33 +1,29 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
 
-import { loginSuccess, loginFailure, LOGIN_REQUEST, LOGOUT_REQUEST, logoutSuccess, logoutFailure, LoginRequestAction, LogoutRequestAction } from './authActions';
+import { loginSuccess, loginFailure, LOGIN_REQUEST, LOGOUT_REQUEST, logoutSuccess, LoginRequestAction, logoutFailure } from './authActions';
 import { login, LoginResponse } from 'src/api/authApi';
 import { setAuthCookies } from 'src/utils/cookies';
+import { handleSagaError } from 'src/utils/error';
 
 function* loginSaga(action: LoginRequestAction) {
   try {
     const response: LoginResponse = yield call(login, action.payload);
     setAuthCookies(response)
     yield put(loginSuccess());
-  } catch (error: any) {
-    yield put(loginFailure(error.message || 'Login failed'));
   }
-  // catch (error) {
-  //   if (error instanceof AxiosError) {
-  //     yield put(loginFailure(error.message || 'Login failed'));
-  //   } 
-  //   if (error instanceof Error) {
-  //     console.log(error.message)
-  //   }
-  // }
+  catch (error) {
+    const message = handleSagaError(error, 'Login Failed')
+    yield put(loginFailure(message))
+  }
 }
 
-function* logoutSaga(action: LogoutRequestAction) {
+function* logoutSaga() {
   try {
     setAuthCookies()
     yield put(logoutSuccess());
-  } catch (error: any) {
-    yield put(logoutFailure(error.message || 'Logout failed'));
+  } catch (error) {
+    const message = handleSagaError(error, 'Logout Failed')
+    yield put(logoutFailure(message))
   }
 }
 
