@@ -4,7 +4,7 @@ import { logoutRequest } from 'src/store/auth/authActions';
 import { store } from 'src/store/store';
 import { getAccessToken, getAccessTokenExpiredAt, getRefreshToken, getRefreshTokenExpiredAt, isTokenExpired, setAuthCookies } from 'src/utils/cookies';
 
-type RequestBody = AuthRequestBody 
+type RequestBody = AuthRequestBody
 
 export const axiosInstance = axios.create({
   baseURL: 'https://rest-test.machineheads.ru',
@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use((config) => {
 });
 
 axiosInstance.interceptors.response.use((response) => response, error => {
-  return Promise.reject(error?.response?.data || error)  
+  return Promise.reject(error?.response?.data || error)
 });
 
 const checkIfTokenExpired = async () => {
@@ -35,7 +35,7 @@ const checkIfTokenExpired = async () => {
     // если accessToken (выдается на 10 минут) просрочен, то обновляем его через /auth/token-refresh
     if (isTokenExpired(accessTokenExpiredAt)) {
       // refreshToken (выдается на месяц) просрочен, то логаут
-      if(isTokenExpired(refreshTokenExpiredAt)){
+      if (isTokenExpired(refreshTokenExpiredAt)) {
         throw new Error('Refresh token expired')
       }
       const form = new FormData();
@@ -52,22 +52,17 @@ const checkIfTokenExpired = async () => {
 }
 
 export const makeRequest = async (url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: RequestBody) => {
-  try {
-    await checkIfTokenExpired()
-    const response = await axiosInstance({
-      url,
-      method,
-      data
-    });
-    
-    return response.data;
-
-  } catch (err) {
-    console.log(err);
-  }
+  await checkIfTokenExpired()
+  const response = await axiosInstance({
+    url,
+    method,
+    data
+  });
+  console.log(response)
+  return response;
 }
 
 export const makeDelay = (ms: number) =>
   new Promise((res) => {
     setTimeout(res, ms)
-})
+  })
