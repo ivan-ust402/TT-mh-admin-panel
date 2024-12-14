@@ -1,9 +1,6 @@
-import React from 'react'
 import { useLocation } from 'react-router-dom'
 
-type Props = {}
-
-export const PostDetails = (props: Props) => {
+export const PostDetails = () => {
   const location = useLocation()
   console.log(location.state)
   return (

@@ -1,9 +1,9 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
-import { LayoutApp } from "src/components";
-import { RequiredAuth } from "src/hoc/RequiredAuth";
-import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from "src/pages";
-import { PostEdit } from "src/pages/PostEdit";
-import { PostAdd } from "src/pages/PostAdd";
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import { LayoutApp } from 'src/components';
+import { RequiredAuth } from 'src/hoc/RequiredAuth';
+import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from 'src/pages';
+import { PostEdit } from 'src/pages/PostEdit';
+import { PostAdd } from 'src/pages/PostAdd';
 
 
 export const router = createBrowserRouter(
@@ -13,7 +13,7 @@ export const router = createBrowserRouter(
         index
         element={<HomePage />}
       />
-      <Route 
+      <Route
         path="profile"
         element={
           <RequiredAuth>
@@ -21,7 +21,7 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route 
+      <Route
         path="posts"
         element={
           <RequiredAuth>
@@ -29,7 +29,7 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route 
+      <Route
         path="posts/:id"
         element={
           <RequiredAuth>
@@ -37,7 +37,7 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route 
+      <Route
         path="posts/:id/edit"
         element={
           <RequiredAuth>
@@ -45,7 +45,7 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route 
+      <Route
         path="posts/add"
         element={
           <RequiredAuth>
@@ -53,7 +53,7 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route 
+      <Route
         path="authors"
         element={
           <RequiredAuth>
@@ -61,7 +61,7 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route 
+      <Route
         path="tags"
         element={
           <RequiredAuth>
@@ -69,9 +69,9 @@ export const router = createBrowserRouter(
           </RequiredAuth>
         }
       />
-      <Route path="/login" element={<Login />}/>
+      <Route path="/login" element={<Login />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
-    
+
   )
 )

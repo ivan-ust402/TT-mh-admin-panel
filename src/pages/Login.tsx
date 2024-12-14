@@ -1,5 +1,5 @@
-import { Alert, Button, Checkbox, Form, Input, Typography } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Alert, Button, Form, Input, Typography } from 'antd'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'src/hooks/useAuth'
@@ -14,11 +14,11 @@ type LoginValues = {
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const {isAuth, loading, error} = useAuth()
+  const { isAuth, loading, error } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(isAuth){
+    if (isAuth) {
       navigate('/')
     }
   }, [isAuth, navigate])
@@ -38,7 +38,7 @@ export const Login = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: 'calc(100vh - 128px)',
+        minHeight: 'calc(100vh - 128px)'
 
       }}
     >
@@ -75,8 +75,8 @@ export const Login = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button 
-            type="primary" 
+          <Button
+            type="primary"
             htmlType="submit"
             loading={loading}
           >
@@ -92,14 +92,13 @@ export const Login = () => {
               style={{
                 position: 'absolute',
                 right: 0,
-                width: '100%',
+                width: '100%'
 
               }}
             />
             : ''
         }
       </Form>
-
     </div>
   )
 }

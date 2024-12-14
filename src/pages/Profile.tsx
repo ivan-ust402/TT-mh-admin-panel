@@ -1,5 +1,5 @@
 import { Alert, Badge, Descriptions, Typography } from 'antd'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Loader } from 'src/components/Loader'
 import { useAppSelector } from 'src/hooks/redux-hooks'
@@ -24,7 +24,7 @@ export const Profile = () => {
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit',
+      second: '2-digit'
     })
 
     return formattedDate
@@ -33,36 +33,36 @@ export const Profile = () => {
   return (
     <>
       {
-        loading && 
+        loading &&
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100%',
+            height: '100%'
           }}
         >
           <Alert
             message={<Loader />}
             type="success"
-        />
+          />
         </div>
       }
       {
-        error && 
+        error &&
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100%',
+            height: '100%'
           }}
         >
           <Alert
             message={error}
             type="error"
             showIcon
-        />
+          />
         </div>
       }
       {profileInfo &&
@@ -73,7 +73,7 @@ export const Profile = () => {
             minHeight: 'calc(100vh - 128px)',
             padding: '40px 20px',
             maxWidth: '1000px',
-            width: '100%',
+            width: '100%'
           }}
         >
           <Descriptions title={<Title level={2} style={{

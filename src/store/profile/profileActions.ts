@@ -1,27 +1,27 @@
-import { GetProfileResponse } from "src/api/profileApi";
+import { GetProfileResponse } from 'src/api/profileApi';
 
-export const GET_PROFILE_REQUEST = "GET_PROFILE_REQUEST";
-export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
-export const GET_PROFILE_FAILURE = "GET_PROFILE_FAILURE";
+export const GET_PROFILE_REQUEST = 'GET_PROFILE_REQUEST';
+export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';
+export const GET_PROFILE_FAILURE = 'GET_PROFILE_FAILURE';
 
 export interface GetProfileRequestAction {
   type: typeof GET_PROFILE_REQUEST;
 }
 
 export interface GetProfileSuccessAction {
+  payload: GetProfileResponse,
   type: typeof GET_PROFILE_SUCCESS;
-  payload: GetProfileResponse
 }
 
 export interface GetProfileFailureAction {
-  type: typeof GET_PROFILE_FAILURE;
   payload: string;
+  type: typeof GET_PROFILE_FAILURE;
 }
 
 export type GetProfileActionTypes = GetProfileRequestAction | GetProfileSuccessAction | GetProfileFailureAction;
 
 export const getProfileRequest = (): GetProfileRequestAction => ({
-  type: GET_PROFILE_REQUEST,
+  type: GET_PROFILE_REQUEST
 })
 
 export const getProfileSuccess = (profile: GetProfileResponse): GetProfileSuccessAction => ({
@@ -31,5 +31,5 @@ export const getProfileSuccess = (profile: GetProfileResponse): GetProfileSucces
 
 export const getProfileFailure = (error: string): GetProfileFailureAction => ({
   type: GET_PROFILE_FAILURE,
-  payload: error,
+  payload: error
 })

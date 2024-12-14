@@ -1,16 +1,16 @@
-import { getAccessToken } from "src/utils/cookies";
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, AuthActionTypes, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from "./authActions";
+import { getAccessToken } from 'src/utils/cookies';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, AuthActionTypes, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from './authActions';
 
 interface AuthState {
+  error: string | null;
   isAuthenticated: boolean;
   loading: boolean;
-  error: string | null;
 }
 
 const initialState: AuthState = {
   isAuthenticated: !!getAccessToken(),
   loading: false,
-  error: null,
+  error: null
 };
 
 const authReducer = (state = initialState, action: AuthActionTypes): AuthState => {
@@ -23,7 +23,7 @@ const authReducer = (state = initialState, action: AuthActionTypes): AuthState =
       return { ...state, loading: false, error: action.payload };
     case LOGOUT_REQUEST:
       return { ...state, loading: true, error: null };
-    case LOGOUT_SUCCESS: 
+    case LOGOUT_SUCCESS:
       return { ...state, loading: false, isAuthenticated: false };
     case LOGOUT_FAILURE:
       return { ...state, loading: false, error: action.payload };

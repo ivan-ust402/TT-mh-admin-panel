@@ -2,173 +2,174 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Pagination, Row, Typography } from 'antd'
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+
 const { Title } = Typography
 const { Meta } = Card;
 
 type Post = {
-  id: number,
-  title: string,
-  code: string,
   authorName: string,
+  code: string,
+  createdAt: string,
+  id: number,
   previewPicture: {
     id: number,
     name: string,
     url: string
   },
-  tagNames: string [],
-  updatedAt: string,
-  createdAt: string
+  tagNames: string[],
+  title: string,
+  updatedAt: string
 }
 
 export const Posts = () => {
   const posts: Post[] = [
     {
       id: 70,
-      title: "Юбилейный",
-      code: "ubilejnyj",
-      authorName: "Иванов Иван Иванович",
+      title: 'Юбилейный',
+      code: 'ubilejnyj',
+      authorName: 'Иванов Иван Иванович',
       previewPicture: {
         id: 94,
-        name: "03.jpg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/7a3/03.jpg"
+        name: '03.jpg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/7a3/03.jpg'
       },
       tagNames: [
-        "Проза"
+        'Проза'
       ],
-      updatedAt: "2023-03-01T11:28:12+03:00",
-      createdAt: "2023-02-28T19:26:45+03:00"
+      updatedAt: '2023-03-01T11:28:12+03:00',
+      createdAt: '2023-02-28T19:26:45+03:00'
     },
     {
       id: 69,
-      title: "Весна",
-      code: "vesna",
-      authorName: "Сергеев Сергей Сергеевич",
+      title: 'Весна',
+      code: 'vesna',
+      authorName: 'Сергеев Сергей Сергеевич',
       previewPicture: {
         id: 93,
-        name: "01.jpg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/d6d/01.jpg"
+        name: '01.jpg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/d6d/01.jpg'
       },
       tagNames: [
-        "Стихи"
+        'Стихи'
       ],
-      updatedAt: "2023-02-28T19:25:31+03:00",
-      createdAt: "2023-02-28T17:33:39+03:00"
+      updatedAt: '2023-02-28T19:25:31+03:00',
+      createdAt: '2023-02-28T17:33:39+03:00'
     },
     {
       id: 45,
-      title: "Сага без тегов",
-      code: "909291",
-      authorName: "Сергеев Сергей Сергеевич",
+      title: 'Сага без тегов',
+      code: '909291',
+      authorName: 'Сергеев Сергей Сергеевич',
       previewPicture: {
         id: 47,
-        name: "download.jpg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/313/download.jpg"
+        name: 'download.jpg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/313/download.jpg'
       },
       tagNames: [],
-      updatedAt: "2023-01-16T13:59:36+03:00",
-      createdAt: "2022-08-03T06:20:04+03:00"
+      updatedAt: '2023-01-16T13:59:36+03:00',
+      createdAt: '2022-08-03T06:20:04+03:00'
     },
     {
       id: 42,
-      title: "Праздник огурца в Суздали",
-      code: "2022",
-      authorName: "Сергеев Сергей Сергеевич",
+      title: 'Праздник огурца в Суздали',
+      code: '2022',
+      authorName: 'Сергеев Сергей Сергеевич',
       previewPicture: {
         id: 44,
-        name: "D2MS.png",
-        url: "http://static-test.machineheads.ru/upload/post-preview/9d2/d2ms.png"
+        name: 'D2MS.png',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/9d2/d2ms.png'
       },
       tagNames: [
-        "Стихи",
-        "Проза",
-        "Песня",
-        "Басня",
-        "Смешные",
-        "Страшные"
+        'Стихи',
+        'Проза',
+        'Песня',
+        'Басня',
+        'Смешные',
+        'Страшные'
       ],
-      updatedAt: "2022-08-03T05:06:18+03:00",
-      createdAt: "2022-08-03T05:06:18+03:00"
+      updatedAt: '2022-08-03T05:06:18+03:00',
+      createdAt: '2022-08-03T05:06:18+03:00'
     },
     {
       id: 41,
-      title: "666",
-      code: "666",
-      authorName: "Сергеев Сергей Сергеевич",
+      title: '666',
+      code: '666',
+      authorName: 'Сергеев Сергей Сергеевич',
       previewPicture: {
         id: 43,
-        name: "0_nmHC1101iCu3OtYU.jpg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/a93/0nmhc1101icu3otyu.jpg"
+        name: '0_nmHC1101iCu3OtYU.jpg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/a93/0nmhc1101icu3otyu.jpg'
       },
       tagNames: [
-        "Басня"
+        'Басня'
       ],
-      updatedAt: "2022-08-03T04:58:18+03:00",
-      createdAt: "2022-08-03T04:58:18+03:00"
+      updatedAt: '2022-08-03T04:58:18+03:00',
+      createdAt: '2022-08-03T04:58:18+03:00'
     },
     {
       id: 39,
-      title: "аыва",
-      code: "ld15pfy3qy",
-      authorName: "Иванов Иван Иванович",
+      title: 'аыва',
+      code: 'ld15pfy3qy',
+      authorName: 'Иванов Иван Иванович',
       previewPicture: {
         id: 41,
-        name: "d9254997d1cd7b1f39167d2363e14c28-1024x935.jpg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/db7/d9254997d1cd7b1f39167d2363e14c28-1024x935.jpg"
+        name: 'd9254997d1cd7b1f39167d2363e14c28-1024x935.jpg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/db7/d9254997d1cd7b1f39167d2363e14c28-1024x935.jpg'
       },
       tagNames: [
-        "Смешные",
-        "Страшные"
+        'Смешные',
+        'Страшные'
       ],
-      updatedAt: "2021-08-13T16:37:11+03:00",
-      createdAt: "2021-08-13T16:37:11+03:00"
+      updatedAt: '2021-08-13T16:37:11+03:00',
+      createdAt: '2021-08-13T16:37:11+03:00'
     },
     {
       id: 38,
-      title: "енекуецй",
-      code: "8h5n99inpi",
-      authorName: "Иванов Иван Иванович",
+      title: 'енекуецй',
+      code: '8h5n99inpi',
+      authorName: 'Иванов Иван Иванович',
       previewPicture: {
         id: 40,
-        name: "s1200.jpeg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/e49/s1200.jpeg"
+        name: 's1200.jpeg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/e49/s1200.jpeg'
       },
       tagNames: [
-        "Стихи"
+        'Стихи'
       ],
-      updatedAt: "2021-08-13T16:37:00+03:00",
-      createdAt: "2021-08-13T16:37:00+03:00"
+      updatedAt: '2021-08-13T16:37:00+03:00',
+      createdAt: '2021-08-13T16:37:00+03:00'
     },
     {
       id: 36,
-      title: "рпарп",
-      code: "p8osw133qe",
-      authorName: "Сергеев Сергей Сергеевич",
+      title: 'рпарп',
+      code: 'p8osw133qe',
+      authorName: 'Сергеев Сергей Сергеевич',
       previewPicture: {
         id: 38,
-        name: "9dbdf1269bf5a53.jpg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/9c1/9dbdf1269bf5a53.jpg"
+        name: '9dbdf1269bf5a53.jpg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/9c1/9dbdf1269bf5a53.jpg'
       },
       tagNames: [
-        "Проза"
+        'Проза'
       ],
-      updatedAt: "2023-03-01T15:41:58+03:00",
-      createdAt: "2021-08-13T16:36:13+03:00"
+      updatedAt: '2023-03-01T15:41:58+03:00',
+      createdAt: '2021-08-13T16:36:13+03:00'
     },
     {
       id: 34,
-      title: "павп",
-      code: "4wzorazc7r",
-      authorName: "Иванов Иван Иванович",
+      title: 'павп',
+      code: '4wzorazc7r',
+      authorName: 'Иванов Иван Иванович',
       previewPicture: {
         id: 36,
-        name: "d9254997d1cd7b1f39167d2363e14c28-1024x935.jpg",
-        url: "http://static-test.machineheads.ru/upload/post-preview/9ab/d9254997d1cd7b1f39167d2363e14c28-1024x935.jpg"
+        name: 'd9254997d1cd7b1f39167d2363e14c28-1024x935.jpg',
+        url: 'http://static-test.machineheads.ru/upload/post-preview/9ab/d9254997d1cd7b1f39167d2363e14c28-1024x935.jpg'
       },
       tagNames: [
-        "Басня"
+        'Басня'
       ],
-      updatedAt: "2021-08-13T16:35:49+03:00",
-      createdAt: "2021-08-13T16:35:49+03:00"
+      updatedAt: '2021-08-13T16:35:49+03:00',
+      createdAt: '2021-08-13T16:35:49+03:00'
     }
   ]
   const location = useLocation()
@@ -193,7 +194,7 @@ export const Posts = () => {
         alignItems: 'center',
         minHeight: 'calc(100vh - 128px)',
         gap: '40px',
-        padding: '40px 20px',
+        padding: '40px 20px'
 
       }}
     >
@@ -204,13 +205,13 @@ export const Posts = () => {
           alignItems: 'center',
           gap: 5,
           width: '100%',
-          maxWidth: '880px',
+          maxWidth: '880px'
         }}
       >
         <Title
           level={2}
           style={{
-            marginBottom: 0,
+            marginBottom: 0
           }}
         >Posts</Title>
         <Link to={'add'}>
@@ -251,9 +252,9 @@ export const Posts = () => {
                       display: 'flex',
                       flexWrap: 'wrap',
                       gap: '5px',
-                      padding: 10,
+                      padding: 10
                     }}>
-                      {post.tagNames.map((tag, index) => {
+                      {post.tagNames.map((tag, indexTag) => {
                         return (
                           <div
                             style={{
@@ -264,7 +265,7 @@ export const Posts = () => {
                               borderRadius: '5px',
                               opacity: 0.8
                             }}
-                            key={index}
+                            key={indexTag}
                           >{tag}</div>
                         )
                       })}
@@ -278,7 +279,7 @@ export const Posts = () => {
                   />,
                   <DeleteOutlined key="delete"
                     onClick={deletePostHandler}
-                  />,
+                  />
                 ]}
                 hoverable
               >

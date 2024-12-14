@@ -1,13 +1,10 @@
 import { Typography } from 'antd'
-import React from 'react'
 import { useAuth } from 'src/hooks/useAuth'
 import { Link } from 'react-router-dom'
 
 const { Title, Text } = Typography
 
-type Props = {}
-
-export const HomePage = (props: Props) => {
+export const HomePage = () => {
   const { isAuth, userName } = useAuth()
   return (
     <div

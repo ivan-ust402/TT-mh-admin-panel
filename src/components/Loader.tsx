@@ -1,9 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons'
-import React from 'react'
 
-type Props = {}
-
-export const Loader = (props: Props) => {
+export const Loader = () => {
   return (
     <div
       style={{
@@ -17,7 +14,7 @@ export const Loader = (props: Props) => {
       <p
         style={{
           margin: 0,
-          padding: 0,          
+          padding: 0
         }}
       >Loading...</p>
     </div>

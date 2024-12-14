@@ -1,4 +1,4 @@
-import { LoginResponse } from "src/api/authApi"
+import { LoginResponse } from 'src/api/authApi'
 
 export const getAccessToken = () => {
   return document.cookie.split('; ').find(row => row.startsWith('access_token='))?.split('=')[1]

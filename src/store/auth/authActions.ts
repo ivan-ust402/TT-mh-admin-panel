@@ -1,13 +1,13 @@
-export const LOGIN_REQUEST = "LOGIN_REQUEST";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILURE = "LOGIN_FAILURE";
-export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export interface LoginRequestAction {
-  type: typeof LOGIN_REQUEST;
   payload: Credentials;
+  type: typeof LOGIN_REQUEST;
 }
 
 export interface LoginSuccessAction {
@@ -15,8 +15,8 @@ export interface LoginSuccessAction {
 }
 
 export interface LoginFailureAction {
-  type: typeof LOGIN_FAILURE;
   payload: string;
+  type: typeof LOGIN_FAILURE;
 }
 
 export interface LogoutRequestAction {
@@ -28,8 +28,8 @@ export interface LogoutSuccessAction {
 }
 
 export interface LogoutFailureAction {
+  payload: string,
   type: typeof LOGOUT_FAILURE;
-  payload: string
 }
 
 
@@ -41,34 +41,34 @@ export interface Credentials {
 }
 
 export interface User {
-  id: string;
   email: string;
+  id: string;
   name: string;
 }
 
 export const loginRequest = (credentials: Credentials): LoginRequestAction => ({
   type: LOGIN_REQUEST,
-  payload: credentials,
+  payload: credentials
 });
 
 export const loginSuccess = (): LoginSuccessAction => ({
-  type: LOGIN_SUCCESS,
+  type: LOGIN_SUCCESS
 });
 
 export const loginFailure = (error: string): LoginFailureAction => ({
   type: LOGIN_FAILURE,
-  payload: error,
+  payload: error
 });
 
 export const logoutRequest = (): LogoutRequestAction => ({
-  type: LOGOUT_REQUEST,
+  type: LOGOUT_REQUEST
 });
 
 export const logoutSuccess = (): LogoutSuccessAction => ({
-  type: LOGOUT_SUCCESS,
+  type: LOGOUT_SUCCESS
 });
 
 export const logoutFailure = (error: string): LogoutFailureAction => ({
   type: LOGOUT_FAILURE,
-  payload: error,
+  payload: error
 });

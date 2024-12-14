@@ -1,8 +1,8 @@
-import { call, put, takeLeading } from "redux-saga/effects";
+import { call, put, takeLeading } from 'redux-saga/effects';
 
-import { loginSuccess, loginFailure, LOGIN_REQUEST, LOGOUT_REQUEST, logoutSuccess, logoutFailure, LoginRequestAction, LogoutRequestAction } from "./authActions";
-import { login, LoginResponse } from "src/api/authApi";
-import { setAuthCookies } from "src/utils/cookies";
+import { loginSuccess, loginFailure, LOGIN_REQUEST, LOGOUT_REQUEST, logoutSuccess, logoutFailure, LoginRequestAction, LogoutRequestAction } from './authActions';
+import { login, LoginResponse } from 'src/api/authApi';
+import { setAuthCookies } from 'src/utils/cookies';
 
 function* loginSaga(action: LoginRequestAction) {
   try {
@@ -10,16 +10,24 @@ function* loginSaga(action: LoginRequestAction) {
     setAuthCookies(response)
     yield put(loginSuccess());
   } catch (error: any) {
-    yield put(loginFailure(error.message || "Login failed"));
+    yield put(loginFailure(error.message || 'Login failed'));
   }
-} 
+  // catch (error) {
+  //   if (error instanceof AxiosError) {
+  //     yield put(loginFailure(error.message || 'Login failed'));
+  //   } 
+  //   if (error instanceof Error) {
+  //     console.log(error.message)
+  //   }
+  // }
+}
 
 function* logoutSaga(action: LogoutRequestAction) {
   try {
     setAuthCookies()
     yield put(logoutSuccess());
   } catch (error: any) {
-    yield put(logoutFailure(error.message || "Logout failed")); 
+    yield put(logoutFailure(error.message || 'Logout failed'));
   }
 }
 

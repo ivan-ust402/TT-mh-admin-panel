@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
-import { RootState } from "src/store/store";
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store/store';
 
 export function useAuth() {
-  const {id, phone, email, name: userName, lastName, secondName, roles, status, isActive, updatedAt, createdAt} = {
+  const { id, phone, email, name: userName, lastName, secondName, roles, status, isActive, updatedAt, createdAt } = {
     id: 0,
     phone: '444',
     email: '2@2.ru',
@@ -13,7 +13,7 @@ export function useAuth() {
     roles: [
       {
         role: 'admin',
-        name: 'admin' 
+        name: 'admin'
       }
     ],
     status: {
@@ -21,8 +21,8 @@ export function useAuth() {
       name: 'confirmed'
     },
     isActive: true,
-    updatedAt: "2019-08-24T14:15:22Z",
-    createdAt: "2019-08-24T14:15:22Z"
+    updatedAt: '2019-08-24T14:15:22Z',
+    createdAt: '2019-08-24T14:15:22Z'
   }
 
   const { isAuthenticated, loading, error } = useSelector((state: RootState) => state.auth);
@@ -30,6 +30,6 @@ export function useAuth() {
     isAuth: isAuthenticated,
     loading,
     error,
-    userName,
+    userName
   }
 }

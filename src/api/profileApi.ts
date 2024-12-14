@@ -1,25 +1,25 @@
-import { makeRequest } from ".";
+import { makeRequest } from '.';
 
-interface ProfileRole  {
-  role: string,
-  name: string
+interface ProfileRole {
+  name: string,
+  role: string
 }
-interface ProfileStatus  {
+interface ProfileStatus {
   code: number,
   name: string
 }
-export interface GetProfileResponse  {
-  id: number,
-  phone: string | null,
+export interface GetProfileResponse {
+  createdAt: string,
   email: string,
-  name: string | null,
-  lastName: string | null,
-  secondName: string | null,
-  roles: ProfileRole[],
-  status: ProfileStatus,
+  id: number,
   isActive: boolean,
-  updatedAt: string,
-  createdAt: string
+  lastName: string | null,
+  name: string | null,
+  phone: string | null,
+  roles: ProfileRole[],
+  secondName: string | null,
+  status: ProfileStatus,
+  updatedAt: string
 }
 
 export const getProfile = async (): Promise<GetProfileResponse> => makeRequest('/profile', 'GET')

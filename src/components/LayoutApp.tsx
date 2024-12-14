@@ -11,27 +11,27 @@ const { Header, Footer, Content } = Layout
 
 const items2: MenuProps['items'] = [
   {
-    key: `profile`,
+    key: 'profile',
     icon: React.createElement(UserOutlined),
-    label: <NavLink to="profile">Profile</NavLink>,
+    label: <NavLink to="profile">Profile</NavLink>
   },
   {
-    key: `manage`,
+    key: 'manage',
     icon: React.createElement(LaptopOutlined),
-    label: `Manage`,
+    label: 'Manage',
     children: [
       {
-        key: `posts`,
-        label: <NavLink to="posts">Posts</NavLink>,
+        key: 'posts',
+        label: <NavLink to="posts">Posts</NavLink>
       },
       {
-        key: `authors`,
-        label: <NavLink to="authors">Authors</NavLink>,
+        key: 'authors',
+        label: <NavLink to="authors">Authors</NavLink>
       },
       {
-        key: `tags`,
-        label: <NavLink to="tags">Tags</NavLink>,
-      },
+        key: 'tags',
+        label: <NavLink to="tags">Tags</NavLink>
+      }
     ]
   }]
 
@@ -43,12 +43,12 @@ export const LayoutApp = () => {
   const location = useLocation()
   const dispatch = useDispatch()
   const fromPage = location.state?.from?.pathname || '/'
-  const initialMenuKey = location.pathname.split('').splice(1).join('') 
+  const initialMenuKey = location.pathname.split('').splice(1).join('')
   const [selectedKey, setSelectedKey] = useState<string>(initialMenuKey)
 
   const handleLogOut = () => {
     dispatch(logoutRequest());
-    navigate("/", { replace: true })
+    navigate('/', { replace: true })
   }
 
   const handleHomeClick = () => {
@@ -61,7 +61,7 @@ export const LayoutApp = () => {
   }
 
   useEffect(() => {
-    if(!isAuth) {
+    if (!isAuth) {
       setSelectedKey('')
     }
   }, [isAuth])
@@ -91,7 +91,7 @@ export const LayoutApp = () => {
           <HomeOutlined
             style={{
               color: '#fff',
-              fontSize: '30px',
+              fontSize: '30px'
             }}
           />
         </NavLink>
@@ -142,7 +142,7 @@ export const LayoutApp = () => {
           <Content
             style={{
               padding: '0 50px',
-              height: '100%',
+              height: '100%'
             }}>
             <Outlet />
           </Content>

@@ -1,9 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 
-type Props = {}
-
-export const PostEdit = (props: Props) => {
+export const PostEdit = () => {
   const location = useLocation()
   console.log(location.state)
   return (
