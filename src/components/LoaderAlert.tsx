@@ -1,7 +1,14 @@
-import React from 'react'
+import { Alert } from 'antd'
+import { Center } from './Center'
+import { Loader } from './Loader'
 
 export const LoaderAlert = () => {
   return (
-    <div>LoaderAlert</div>
+    <Center>
+      <Alert
+        message={<Loader />}
+        type="success"
+      />
+    </Center>
   )
 }

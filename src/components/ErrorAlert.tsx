@@ -1,8 +1,19 @@
 import React from 'react'
+import { Center } from './Center'
+import { Alert } from 'antd'
 
+interface Props {
+  error: string
+}
 
-export const ErrorAlert = () => {
+export const ErrorAlert = ({ error }: Props) => {
   return (
-    <div>ErrorAlert</div>
+    <Center>
+      <Alert
+          message={error}
+          type="error"
+          showIcon
+        />
+    </Center>
   )
 }
