@@ -1,7 +1,7 @@
-import { Alert, Badge, Descriptions, Typography } from 'antd'
+import { Badge, Descriptions, Typography } from 'antd'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Container, Loader } from 'src/components'
+import { Container, ErrorAlert, LoaderAlert } from 'src/components'
 
 import { useAppSelector } from 'src/hooks/redux-hooks'
 import { getProfileRequest } from 'src/store/profile/profileActions'
@@ -19,39 +19,13 @@ export const Profile = () => {
 
   if (loading) {
     return (
-      // ????
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%'
-        }}
-      >
-        <Alert
-          message={<Loader />}
-          type="success"
-        />
-      </div>
+      <LoaderAlert />
     )
   }
 
   if (error) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%'
-        }}
-      >
-        <Alert
-          message={error}
-          type="error"
-          showIcon
-        />
-      </div>
+      <ErrorAlert error={error} />
     )
   }
   return (
