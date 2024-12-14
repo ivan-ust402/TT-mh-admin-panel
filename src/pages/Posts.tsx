@@ -1,7 +1,8 @@
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Pagination, Row, Typography } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { getPosts } from 'src/api/postsApi'
 import { Container } from 'src/components'
 import { StyleSheet } from 'src/utils'
 
@@ -187,6 +188,10 @@ export const Posts = () => {
     e.preventDefault()
     alert('DELETE!')
   }
+
+  useEffect(() => {
+    getPosts(1)
+  },[]) 
   return (
     <Container style={styles.wrapper}>
       <div
