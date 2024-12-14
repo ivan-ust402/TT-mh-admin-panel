@@ -2,6 +2,8 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Card, Col, Pagination, Row, Typography } from 'antd'
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Container } from 'src/components'
+import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
 const { Meta } = Card;
@@ -186,18 +188,7 @@ export const Posts = () => {
     alert('DELETE!')
   }
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: 'calc(100vh - 128px)',
-        gap: '40px',
-        padding: '40px 20px'
-
-      }}
-    >
+    <Container style={styles.wrapper}>
       <div
         style={{
           display: 'flex',
@@ -254,7 +245,7 @@ export const Posts = () => {
                       gap: '5px',
                       padding: 10
                     }}>
-                      {post.tagNames.map((tag, indexTag) => {
+                      {post.tagNames.map((tag, tagIndex) => {
                         return (
                           <div
                             style={{
@@ -265,7 +256,7 @@ export const Posts = () => {
                               borderRadius: '5px',
                               opacity: 0.8
                             }}
-                            key={indexTag}
+                            key={tagIndex}
                           >{tag}</div>
                         )
                       })}
@@ -293,6 +284,12 @@ export const Posts = () => {
         ))}
       </Row>
       <Pagination defaultCurrent={1} total={50} />
-    </div >
+    </Container >
   )
+}
+
+const styles: StyleSheet = {
+  wrapper: {
+    alignItems: 'center'
+  }
 }

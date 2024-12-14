@@ -36,7 +36,6 @@ export const HomePage = () => {
             </Text>
           </>
       }
-
     </div>
   )
 }

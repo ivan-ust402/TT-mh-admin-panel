@@ -2,9 +2,8 @@ import { Typography } from 'antd'
 import React from 'react'
 
 const { Title, Text } = Typography
-type Props = {}
 
-export const NotFoundPage = (props: Props) => {
+export const NotFoundPage = () => {
   return (
     <div
       style={{

@@ -1,20 +1,42 @@
+import { Typography } from 'antd'
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import { Container, EditPostForm, EditPostFormValues } from 'src/components'
+import { StyleSheet } from 'src/utils'
+
+const { Title } = Typography
+
+// type Props = {}
 
 export const PostEdit = () => {
   const location = useLocation()
   console.log(location.state)
+  // const params = useParams()
+
+  const post = {
+    code: 'code',
+    title: 'title',
+    authorId: 1,
+    tagIds: [1, 2],
+    text: 'text',
+    previewPicture: 'previewPicture'
+  }
+
+  const onFinish = (values: EditPostFormValues) => {
+    // api editPost
+    console.log(values);
+  };
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: 'calc(100vh - 128px)'
-      }}
-    >
-      <h2>PostEdit</h2>
-    </div>
+    <Container style={styles.wrapper}>
+      <Title level={2}>Edit Post</Title>
+      <EditPostForm onFinish={onFinish} initialValues={post} />
+    </Container>
   )
+}
+
+const styles: StyleSheet = {
+  wrapper: {
+    maxWidth: '880px'
+  }
 }
