@@ -5,12 +5,15 @@ import { authWatcher } from './auth/authSaga';
 import { all } from 'redux-saga/effects';
 import { profileWatcher } from './profile/profileSaga';
 import profileReducer from './profile/profileReducer';
+import { postsWatcher } from './posts/postsSaga';
+import postsReducer from './posts/postsReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  profile: profileReducer
+  profile: profileReducer,
+  posts: postsReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -18,7 +21,8 @@ export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 function* rootSagas() {
   yield all([
     authWatcher(),
-    profileWatcher()
+    profileWatcher(),
+    postsWatcher()
   ])
 }
 

@@ -46,6 +46,14 @@ export const router = createBrowserRouter(
         }
       />
       <Route
+        path="posts/:_page?"
+        element={
+          <RequiredAuth>
+            <Posts />
+          </RequiredAuth>
+        }
+      />
+      <Route
         path="posts/add"
         element={
           <RequiredAuth>

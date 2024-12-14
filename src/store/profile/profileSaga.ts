@@ -10,14 +10,13 @@ import { handleSagaError } from 'src/utils/error';
 function* getProfileSaga() {
   try {
     const response: AxiosResponse<GetProfileResponse> = yield call(getProfile)
-    // const response: AxiosResponse<GetPostsResponse> = yield call(getPosts, 1)
+    
     // Искусственная задерка для отображения состояния loading
     yield makeDelay(500)
-    // console.log(response.headers['x-pagination-page-count'])
-    // const count: string = response.headers['x-pagination-page-count']
+    
     yield put(getProfileSuccess(response.data))
   } catch (error) {
-    const message = handleSagaError(error, 'Getting profile object failed')
+    const message = handleSagaError(error, 'Profile request failed')
     yield put(getProfileFailure(message))
   }
 }

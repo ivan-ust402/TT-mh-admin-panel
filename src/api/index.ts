@@ -58,9 +58,19 @@ export const makeRequest = async (url: string, method: 'GET' | 'POST' | 'PUT' | 
     method,
     data
   });
-  console.log(response)
   return response;
 }
+
+// export const makeRequestExtended = async (url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: RequestBody) => {
+//   await checkIfTokenExpired()
+//   const response = await axiosInstance({
+//     url,
+//     method,
+//     data
+//   });
+//   console.log(response)
+//   return response;
+// }
 
 export const makeDelay = (ms: number) =>
   new Promise((res) => {
