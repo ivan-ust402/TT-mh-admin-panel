@@ -10,7 +10,7 @@ export type Tag = {
   createdAt: string,
   id: number,
   name: string,
-  sort: string | null,
+  sort: number | null,
   updatedAt: string
 }
 
@@ -35,7 +35,7 @@ export const CardTag = ({ tag, deleteTag, editTag }: Props) => {
         description={
         <>
           <p>Код: {tag.code},</p>
-          <p>Сортировка: {tag.sort? tag.sort : 'отсутствует'},</p>
+          <p>Сортировка: {tag.sort ? tag.sort : 'отсутствует'},</p>
           <p>Создан: {dateFormatter(tag.createdAt)},</p>
           <p>Обновлен: {dateFormatter(tag.updatedAt)}</p>
         </>

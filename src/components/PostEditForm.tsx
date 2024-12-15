@@ -1,7 +1,9 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Select, Upload } from 'antd'
-import { Author, Tag } from 'src/pages'
+import { Tag } from 'src/api/tagsApi'
+
 import { StyleSheet } from 'src/utils'
+import { Author } from './CardAuthor'
 
 interface Props {
     initialValues?: PostEditFormValues,

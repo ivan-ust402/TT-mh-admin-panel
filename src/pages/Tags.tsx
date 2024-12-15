@@ -1,72 +1,20 @@
 import { Col, Row } from 'antd'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { Container, TitleContainerWithAddButton } from 'src/components'
+import { Container, ErrorAlert, LoaderAlert, TitleContainerWithAddButton } from 'src/components'
 import { CardTag } from 'src/components/CardTag'
+import { useAppSelector } from 'src/hooks/redux-hooks'
+import { getTagsRequest } from 'src/store/tags/tagsActions'
 import { StyleSheet } from 'src/utils'
 
-export type Tag = {
-  code: string,
-  createdAt: string,
-  id: number,
-  name: string,
-  sort: string | null,
-  updatedAt: string
-}
-
 export const Tags = () => {
-  const tags: Tag[] = [
-    {
-      id: 4,
-      name: 'Басня',
-      code: 'basna',
-      sort: null,
-      updatedAt: '2021-05-27T08:26:37+03:00',
-      createdAt: '2021-05-27T08:26:37+03:00'
-    },
-    {
-      id: 3,
-      name: 'Песня',
-      code: 'pesna',
-      sort: null,
-      updatedAt: '2021-05-27T08:26:33+03:00',
-      createdAt: '2021-05-27T08:26:33+03:00'
-    },
-    {
-      id: 2,
-      name: 'Проза',
-      code: 'proza',
-      sort: null,
-      updatedAt: '2021-05-27T08:26:25+03:00',
-      createdAt: '2021-05-27T08:26:25+03:00'
-    },
-    {
-      id: 5,
-      name: 'Смешные',
-      code: 'smesnye',
-      sort: null,
-      updatedAt: '2021-05-27T08:26:43+03:00',
-      createdAt: '2021-05-27T08:26:43+03:00'
-    },
-    {
-      id: 1,
-      name: 'Стихи',
-      code: 'stihi',
-      sort: null,
-      updatedAt: '2021-05-27T08:26:20+03:00',
-      createdAt: '2021-05-27T08:26:20+03:00'
-    },
-    {
-      id: 6,
-      name: 'Страшные',
-      code: 'strasnye',
-      sort: null,
-      updatedAt: '2021-05-27T08:26:57+03:00',
-      createdAt: '2021-05-27T08:26:57+03:00'
-    }
-  ]
+  const dispatch = useDispatch()
+  const {tags, loading, error} = useAppSelector(state => state.tags)
   const location = useLocation()
   // const navigate = useNavigate()
 
+  console.log(tags)
   const editTagHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
     // navigate(`edit/${id}`, {
@@ -78,6 +26,13 @@ export const Tags = () => {
     e.preventDefault()
     alert(`DELETE tag ID = ${id}!`)
   }
+
+  useEffect(() => {
+    dispatch(getTagsRequest())
+  }, [dispatch])
+
+  if (loading) { return <LoaderAlert /> }
+  if (error) { return <ErrorAlert error={error} /> }
 
   return (
     <Container style={styles.wrapper}>
