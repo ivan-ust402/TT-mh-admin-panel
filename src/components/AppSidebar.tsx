@@ -38,7 +38,7 @@ interface Props {
   selectedKey: string
 }
 
-export const SidebarApp = ({ selectedKey, handleMenuClick }: Props) => {
+export const AppSidebar = ({ selectedKey, handleMenuClick }: Props) => {
   return (
     <Sider
       breakpoint="lg"

@@ -4,11 +4,11 @@ import { Author, Tag } from 'src/pages'
 import { StyleSheet } from 'src/utils'
 
 interface Props {
-    initialValues?: EditPostFormValues,
-    onFinish: (values: EditPostFormValues) => void
+    initialValues?: PostEditFormValues,
+    onFinish: (values: PostEditFormValues) => void
 }
 
-export interface EditPostFormValues {
+export interface PostEditFormValues {
     authorId: number,
     code: string,
     previewPicture: string,
@@ -118,7 +118,7 @@ const tags: Tag[] = [
 }]
 
 
-export const EditPostForm = ({ onFinish, initialValues }: Props) => {
+export const PostEditForm = ({ onFinish, initialValues }: Props) => {
     const handleChange = (value: string[]) => {
         console.log(`selected ${value}`);
     };

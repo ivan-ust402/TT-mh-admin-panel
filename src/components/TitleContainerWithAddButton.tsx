@@ -1,5 +1,5 @@
 import React from 'react'
-import { AddButton } from './AddButton'
+import { ButtonAdd } from './ButtonAdd'
 import { Typography } from 'antd'
 import { StyleSheet } from 'src/utils'
 
@@ -15,7 +15,7 @@ export const TitleContainerWithAddButton = ({ title, buttonTitle, routeTo }: Pro
   return (
     <div style={styles.titleContainer}>
       <Title level={2} style={styles.title}>{title}</Title>
-      <AddButton title={buttonTitle} routeTo={routeTo} />
+      <ButtonAdd title={buttonTitle} routeTo={routeTo} />
     </div>
   )
 }

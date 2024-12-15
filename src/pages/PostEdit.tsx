@@ -1,7 +1,7 @@
 import { Typography } from 'antd'
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import { Container, EditPostForm, EditPostFormValues } from 'src/components'
+import { Container, PostEditForm, PostEditFormValues } from 'src/components'
 import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
@@ -22,7 +22,7 @@ export const PostEdit = () => {
     previewPicture: 'previewPicture'
   }
 
-  const onFinish = (values: EditPostFormValues) => {
+  const onFinish = (values: PostEditFormValues) => {
     // api editPost
     console.log(values);
   };
@@ -30,7 +30,7 @@ export const PostEdit = () => {
   return (
     <Container style={styles.wrapper}>
       <Title level={2}>Edit Post</Title>
-      <EditPostForm onFinish={onFinish} initialValues={post} />
+      <PostEditForm onFinish={onFinish} initialValues={post} />
     </Container>
   )
 }

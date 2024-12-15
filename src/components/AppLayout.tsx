@@ -6,12 +6,12 @@ import { useAuth } from '../hooks/useAuth'
 import { useDispatch } from 'react-redux'
 import { logoutRequest } from 'src/store/auth/authActions'
 import { StyleSheet } from 'src/utils'
-import { SidebarApp } from './SidebarApp'
+import { AppSidebar } from './AppSidebar'
 import { checkMenuKey } from 'src/utils/menu'
 
 const { Header, Footer, Content } = Layout
 
-export const LayoutApp = () => {
+export const AppLayout = () => {
   const { isAuth } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
@@ -34,7 +34,7 @@ export const LayoutApp = () => {
   }
 
   useEffect(() => {
-    if ( !isAuth || !checkMenuKey(initialMenuKey)) {
+    if (!isAuth || !checkMenuKey(initialMenuKey)) {
       setSelectedKey('')
     }
   }, [initialMenuKey, isAuth])
@@ -48,19 +48,19 @@ export const LayoutApp = () => {
           isAuth
             ? <Button type='default' onClick={handleLogOut}>Log Out</Button>
             : <Link
-                to={'/login'}
-                state={{ from: fromPage }}
-                style={styles.loginLink}
-                onClick={handleHomeClick}
-              >
-                <Button type='default' >Log In</Button>
-              </Link>
+              to={'/login'}
+              state={{ from: fromPage }}
+              style={styles.loginLink}
+              onClick={handleHomeClick}
+            >
+              <Button type='default' >Log In</Button>
+            </Link>
         }
       </Header>
       <Layout>
         {
-          isAuth 
-            ? <SidebarApp handleMenuClick={handleMenuClick} selectedKey={selectedKey} />
+          isAuth
+            ? <AppSidebar handleMenuClick={handleMenuClick} selectedKey={selectedKey} />
             : ''
         }
         <Layout>
@@ -105,7 +105,7 @@ const styles: StyleSheet = {
     padding: '0 50px',
     height: '100%'
   },
-  footer: { 
-    textAlign: 'center' 
+  footer: {
+    textAlign: 'center'
   }
 }

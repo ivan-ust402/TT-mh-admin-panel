@@ -8,7 +8,7 @@ interface Props {
   title: string;
 }
 
-export const AddButton = ({title, routeTo}: Props) => {
+export const ButtonAdd = ({title, routeTo}: Props) => {
   return (
     <Link to={`${routeTo}`}>
       <Button type='primary'>

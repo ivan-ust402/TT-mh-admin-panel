@@ -1,15 +1,16 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-import { LayoutApp } from 'src/components';
+import { AppLayout } from 'src/components';
 import { RequiredAuth } from 'src/hoc/RequiredAuth';
 import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from 'src/pages';
 import { PostEdit } from 'src/pages/PostEdit';
 import { PostAdd } from 'src/pages/PostAdd';
 import { RequiredSearchParams } from 'src/hoc';
+import { AuthorAdd } from 'src/pages/AuthorAdd';
 
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<LayoutApp />}>
+    <Route path="/" element={<AppLayout />}>
       <Route
         index
         element={<HomePage />}
@@ -61,6 +62,14 @@ export const router = createBrowserRouter(
         element={
           <RequiredAuth>
             <Authors />
+          </RequiredAuth>
+        }
+      />
+      <Route
+        path="authors/add"
+        element={
+          <RequiredAuth>
+            <AuthorAdd />
           </RequiredAuth>
         }
       />

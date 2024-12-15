@@ -1,10 +1,10 @@
 import { Typography } from 'antd'
-import { Container, PostEditForm, PostEditFormValues } from 'src/components'
+import { Container, AuthorEditForm, PostEditFormValues } from 'src/components'
 import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
 
-export const PostAdd = () => {
+export const AuthorAdd = () => {
   const onFinish = (values: PostEditFormValues) => {
     // api addPost
     console.log(values);
@@ -12,8 +12,8 @@ export const PostAdd = () => {
 
   return (
     <Container style={styles.wrapper}>
-      <Title level={2}>Create New Post</Title>
-      <PostEditForm onFinish={onFinish} />
+      <Title level={2}>Create New Author</Title>
+      <AuthorEditForm onFinish={onFinish} />
     </Container>
   )
 }

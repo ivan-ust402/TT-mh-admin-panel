@@ -1,6 +1,6 @@
 import { Typography } from 'antd'
 import React from 'react'
-import { Container } from 'src/components'
+import { Container, TitleContainerWithAddButton } from 'src/components'
 // import { StyleSheet } from 'src/utils'
 
 const { Title, Text } = Typography
@@ -67,6 +67,7 @@ export const Authors = () => {
 
   return (
     <Container>
+      <TitleContainerWithAddButton buttonTitle='Add new author' routeTo='/authors/add' title='Authors' />
       <Title level={2} >Authors</Title>
       <Text>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore magnam vel facilis a debitis perferendis consequatur doloremque blanditiis, vitae, ut consectetur omnis. Nam ullam sint, odio accusantium rem velit dolor amet laborum.
