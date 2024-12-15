@@ -1,9 +1,9 @@
-import { Typography } from 'antd'
+import { Col, Row } from 'antd'
 import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Container, TitleContainerWithAddButton } from 'src/components'
-// import { StyleSheet } from 'src/utils'
-
-const { Title, Text } = Typography
+import { CardAuthor } from 'src/components/CardAuthor'
+import { StyleSheet } from 'src/utils'
 
 export type Author = {
   avatar: {
@@ -61,21 +61,46 @@ export const Authors = () => {
       createdAt: '2021-05-27T08:25:23+03:00'
     }
   ]
-  authors.forEach(author => {
-    return console.log(author)
-  })
+
+  const location = useLocation()
+  // const navigate = useNavigate()
+
+  const editAuthorHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
+    e.preventDefault()
+    // navigate(`edit/${id}`, {
+    //   state: location
+    // })
+    alert(`EDIT author ID = ${id}!`)
+  }
+  const deleteAuthorHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
+    e.preventDefault()
+    alert(`DELETE author ID = ${id}!`)
+  }
 
   return (
-    <Container>
-      <TitleContainerWithAddButton buttonTitle='Add new author' routeTo='/authors/add' title='Authors' />
-      <Title level={2} >Authors</Title>
-      <Text>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore magnam vel facilis a debitis perferendis consequatur doloremque blanditiis, vitae, ut consectetur omnis. Nam ullam sint, odio accusantium rem velit dolor amet laborum.
-      </Text>
+    <Container style={styles.wrapper}>
+      <TitleContainerWithAddButton title='Authors' />
+      <Row
+        gutter={[30, 50]}
+        style={styles.row}
+      >
+        {authors?.map((author, index) => (
+          <Col key={index}>
+            <Link to={`detail?id=${author.id}`} state={location}>
+              <CardAuthor author={author} editAuthor={editAuthorHandler} deleteAuthor={deleteAuthorHandler} />
+            </Link>
+          </Col>
+        ))}
+      </Row>
     </Container>
   )
 }
 
-// const styles: StyleSheet = {
-
-// }
+const styles: StyleSheet = {
+  wrapper: {
+    alignItems: 'center'
+  },
+  row: {
+    maxWidth: '1000px'
+  }
+}

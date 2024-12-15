@@ -7,7 +7,7 @@ import { StyleSheet } from 'src/utils'
 const { Meta } = Card;
 
 interface Props {
-  deletePost: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void,
+  deletePost: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => void,
   editPost: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => void,
   post: Post
 }
@@ -35,7 +35,7 @@ export const CardPost = ({ post, deletePost, editPost }: Props) => {
       }
       actions={[
         <EditOutlined key="edit" onClick={(e) => editPost(e, post.id)} />,
-        <DeleteOutlined key="delete" onClick={deletePost} />
+        <DeleteOutlined key="delete" onClick={(e) => deletePost(e, post.id)} />
       ]}
       style={styles.card}
       hoverable

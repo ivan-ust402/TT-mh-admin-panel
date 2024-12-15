@@ -5,17 +5,22 @@ import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
 
-interface Props {
+interface ButtonSettings {
   buttonTitle: string,
-  routeTo: string,
+  routeTo: string
+}
+interface Props {
+  buttonSettings?: ButtonSettings
   title: string
 }
 
-export const TitleContainerWithAddButton = ({ title, buttonTitle, routeTo }: Props) => {
+export const TitleContainerWithAddButton = ({ title, buttonSettings }: Props) => {
   return (
     <div style={styles.titleContainer}>
       <Title level={2} style={styles.title}>{title}</Title>
-      <ButtonAdd title={buttonTitle} routeTo={routeTo} />
+      {
+        buttonSettings && <ButtonAdd title={buttonSettings.buttonTitle} routeTo={buttonSettings.routeTo} />
+      }
     </div>
   )
 }

@@ -22,9 +22,9 @@ export const Posts = () => {
       state: location
     })
   }
-  const deletePostHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  const deletePostHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    alert('DELETE!')
+    alert(`DELETE post ID = ${id}!`)
   }
 
   const changePageHandler = (page: number
@@ -42,7 +42,7 @@ export const Posts = () => {
 
   return (
     <Container style={styles.wrapper}>
-      <TitleContainerWithAddButton title='Posts' buttonTitle='Add new post' routeTo='add' />
+      <TitleContainerWithAddButton title='Posts' buttonSettings={{buttonTitle: 'Add new post', routeTo: 'add'}}  />
       <Row
         gutter={[16, 16]}
         style={styles.row}

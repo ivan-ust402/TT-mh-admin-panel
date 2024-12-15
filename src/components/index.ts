@@ -1,5 +1,4 @@
 export * from './AppLayout'
-export * from './AuthorEditForm'
 export * from './Loader'
 export * from './Container'
 export * from './PostEditForm'

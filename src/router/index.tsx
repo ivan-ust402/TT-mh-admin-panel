@@ -1,11 +1,10 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import { AppLayout } from 'src/components';
 import { RequiredAuth } from 'src/hoc/RequiredAuth';
-import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from 'src/pages';
+import { AuthorDetails, Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, TagDetails, Tags } from 'src/pages';
 import { PostEdit } from 'src/pages/PostEdit';
 import { PostAdd } from 'src/pages/PostAdd';
 import { RequiredSearchParams } from 'src/hoc';
-import { AuthorAdd } from 'src/pages/AuthorAdd';
 
 
 export const router = createBrowserRouter(
@@ -66,10 +65,12 @@ export const router = createBrowserRouter(
         }
       />
       <Route
-        path="authors/add"
+        path="authors/detail/:id?"
         element={
           <RequiredAuth>
-            <AuthorAdd />
+            <RequiredSearchParams>
+              <AuthorDetails />
+            </RequiredSearchParams>
           </RequiredAuth>
         }
       />
@@ -78,6 +79,16 @@ export const router = createBrowserRouter(
         element={
           <RequiredAuth>
             <Tags />
+          </RequiredAuth>
+        }
+      />
+      <Route
+        path="tags/detail/:id?"
+        element={
+          <RequiredAuth>
+            <RequiredSearchParams>
+              <TagDetails />
+            </RequiredSearchParams>
           </RequiredAuth>
         }
       />

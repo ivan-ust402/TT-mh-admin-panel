@@ -1,5 +1,5 @@
 import { Descriptions, Typography } from 'antd'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { Container, ErrorAlert, LoaderAlert } from 'src/components'
