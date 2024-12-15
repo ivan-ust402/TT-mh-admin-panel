@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { makeRequest } from '.';
 
 export interface Post {
@@ -26,13 +27,7 @@ export type GetPostsResponse = {
   headers: GetPostsParams;
 }
 
-export const getPosts = async (page: number): Promise<GetPostsResponse> => {
+export const getPosts = async (page: number): Promise<AxiosResponse<Post[]>> => {
   const response = await makeRequest(`/manage/posts?page=${page}`, 'GET')
-  return {
-    data: response.data,
-    headers: {
-      currentPage: response.headers['x-pagination-current-page'],
-      pageCount: response.headers['x-pagination-page-count'], postsPerPage: response.headers['x-pagination-per-page'], totalPostsCount: response.headers['x-pagination-total-count']
-    }
-  }
+  return response;
 }

@@ -1,6 +1,6 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Card, Col, Pagination, Row } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Container, ErrorAlert, LoaderAlert, TitleContainerWithAddButton } from 'src/components'
@@ -8,23 +8,17 @@ import { useAppSelector } from 'src/hooks/redux-hooks'
 import { getPostsRequest } from 'src/store/posts/postsActions'
 import { StyleSheet } from 'src/utils'
 
-
 const { Meta } = Card;
-
 
 export const Posts = () => {
   const dispatch = useDispatch()
-  const { error, loading, params, posts } = useAppSelector(state => state.posts)
+  const { error, loading, totalPostsCount, postsPerPage, posts } = useAppSelector(state => state.posts)
+  
   const location = useLocation()
   const navigate = useNavigate()
   const searchParams = new URLSearchParams(location.search)
   const searchPage = Number(searchParams.get('page'))
 
-  const [currentPage, setCurrentPage] = useState(params?.currentPage || searchPage || 0)
-  const [pageCount, setPageCount] = useState(params?.pageCount || 0)
-  const [totalPosts, setTotalPosts] = useState(params?.totalPostsCount || 0)
-
-  console.log('1')
   const editPostHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
     navigate(`/posts/${id}/edit`, {
@@ -38,33 +32,13 @@ export const Posts = () => {
 
   const changePageHandler = (page: number
   ) => {
-    setCurrentPage(page);
-    searchParams.set('page', page.toString())
-    navigate(`${location.pathname}?${searchParams.toString()}`)
+    navigate(`${location.pathname}?page=${page}`)
   }
 
-  useEffect(() => {
-    let targetPage = currentPage
-    if (currentPage > pageCount) {
-      targetPage = pageCount
-    }
-    if (currentPage < 0 && pageCount > 0) {
-      targetPage = 1
-    }
-    navigate(`${location.pathname}?page=${targetPage}`)
-    console.log('2')
-    dispatch(getPostsRequest(currentPage))
-  }, [dispatch, currentPage, pageCount])
+  useEffect(()=>{
+    dispatch(getPostsRequest(searchPage))
+  },[dispatch, searchPage])
 
-  useEffect(() => {
-    if (params && params.totalPostsCount) {
-      setTotalPosts(params.totalPostsCount)
-    }
-    if (params && params.pageCount) {
-      setPageCount(params.pageCount)
-    }
-    console.log('3')
-  }, [params])
 
   if (loading) {
     return (
@@ -132,9 +106,9 @@ export const Posts = () => {
         ))}
       </Row>
       <Pagination
-        current={currentPage}
-        total={totalPosts}
-        pageSize={params?.postsPerPage || 0}
+        current={searchPage}
+        total={totalPostsCount}
+        pageSize={postsPerPage}
         onChange={changePageHandler} />
     </Container >
   )

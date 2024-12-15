@@ -10,8 +10,16 @@ export interface GetPostsRequestAction {
   payload: number;
   type: typeof GET_POSTS_REQUEST;
 }
+
+export interface GetPostsSuccessPayload {
+  currentPage: number;
+  pageCount: number;
+  posts: Post[];
+  postsPerPage: number;
+  totalPostsCount: number;
+}
 export interface GetPostsSuccessAction {
-  payload: Post[];
+  payload: GetPostsSuccessPayload,
   type: typeof GET_POSTS_SUCCESS;
 }
 export interface GetPostsParamsSuccessAction {
@@ -25,21 +33,14 @@ export interface GetPostsFailureAction {
 
 export type GetPostsActionTypes = GetPostsRequestAction | GetPostsSuccessAction | GetPostsParamsSuccessAction | GetPostsFailureAction
 
-
-
 export const getPostsRequest = (page: number): GetPostsRequestAction => ({
   type: GET_POSTS_REQUEST,
   payload: page
 })
 
-export const getPostsSuccess = (posts: Post[]): GetPostsSuccessAction => ({
+export const getPostsSuccess = (payload: GetPostsSuccessPayload): GetPostsSuccessAction => ({
   type: GET_POSTS_SUCCESS,
-  payload: posts
-})
-
-export const getPostsParamsSuccess = (params: GetPostsParams): GetPostsParamsSuccessAction => ({
-  type: GET_POSTS_PARAMS_SUCCESS,
-  payload: params
+  payload
 })
 
 export const getPostsFailure = (error: string): GetPostsFailureAction => ({
