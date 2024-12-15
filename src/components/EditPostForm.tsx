@@ -22,15 +22,8 @@ const layout = {
 }
 
 const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not a valid email!',
-      number: '${label} is not a valid number!'
-    },
-    number: {
-      range: '${label} must be between ${min} and ${max}'
-    }
-  }
+    required: '${label} is required!'
+}
 
 const authors: Author[] = [
     {
@@ -122,7 +115,7 @@ const tags: Tag[] = [
         sort: null,
         updatedAt: '2021-05-27T08:26:57+03:00',
         createdAt: '2021-05-27T08:26:57+03:00'
-    }]
+}]
 
 
 export const EditPostForm = ({ onFinish, initialValues }: Props) => {
@@ -149,7 +142,7 @@ export const EditPostForm = ({ onFinish, initialValues }: Props) => {
                 <Select
                     mode="multiple"
                     allowClear
-                    style={{ width: '100%' }}
+                    style={styles.selectTags}
                     placeholder="Please select"
                     // defaultValue={[]}
                     onChange={handleChange}
@@ -189,5 +182,8 @@ export const EditPostForm = ({ onFinish, initialValues }: Props) => {
 const styles: StyleSheet = {
     uploadLabel: {
         marginTop: 8 
+    },
+    selectTags: { 
+        width: '100%' 
     }
 }

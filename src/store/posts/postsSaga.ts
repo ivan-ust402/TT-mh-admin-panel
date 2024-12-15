@@ -1,5 +1,5 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
-import { handleSagaError } from 'src/utils/error';
+import { handleResponseError } from 'src/utils/error';
 import { GET_POSTS_REQUEST, getPostsFailure, GetPostsRequestAction, getPostsSuccess } from './postsActions';
 import { getPosts, Post } from 'src/api/postsApi';
 import { makeDelay } from 'src/api';
@@ -14,11 +14,11 @@ function* getPostsSaga(action: GetPostsRequestAction) {
       posts: response.data,
       currentPage: Number(response.headers['x-pagination-current-page']) || 0,
       pageCount: Number(response.headers['x-pagination-page-count']) || 0,
-      postsPerPage: Number(response.headers['x-pagination-per-page']) || 0, 
+      postsPerPage: Number(response.headers['x-pagination-per-page']) || 0,
       totalPostsCount: Number(response.headers['x-pagination-total-count'] || 0)
-  }))
+    }))
   } catch (error) {
-    const message = handleSagaError(error, 'Posts request failed')
+    const message = handleResponseError(error, 'Posts request failed')
     yield put(getPostsFailure(message))
   }
 }

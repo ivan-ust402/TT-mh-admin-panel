@@ -1,5 +1,7 @@
 import { Typography } from 'antd'
 import React from 'react'
+import { Container } from 'src/components'
+// import { StyleSheet } from 'src/utils'
 
 const { Title, Text } = Typography
 
@@ -64,19 +66,15 @@ export const Authors = () => {
   })
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: 'calc(100vh - 128px)'
-      }}
-    >
+    <Container>
       <Title level={2} >Authors</Title>
       <Text>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore magnam vel facilis a debitis perferendis consequatur doloremque blanditiis, vitae, ut consectetur omnis. Nam ullam sint, odio accusantium rem velit dolor amet laborum.
       </Text>
-    </div>
+    </Container>
   )
 }
+
+// const styles: StyleSheet = {
+
+// }

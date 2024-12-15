@@ -17,24 +17,20 @@ export const Profile = () => {
     dispatch(getProfileRequest())
   }, [dispatch])
 
-  if (loading) {
-    return (
-      <LoaderAlert />
-    )
-  }
+  if (loading) { return <LoaderAlert /> }
+  if (error) { return <ErrorAlert error={error} /> }
 
-  if (error) {
-    return (
-      <ErrorAlert error={error} />
-    )
-  }
   return (
     <Container style={styles.wrapper}>
-      <Descriptions title={<Title level={2} style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px'
-      }}>Profile&nbsp; {profileInfo?.isActive ? <Badge status="processing" /> : ''}</Title>} bordered column={1} >
+      <Descriptions
+        title={
+          <Title level={2} style={styles.descriptionTitle}>
+            Profile&nbsp;
+            {profileInfo?.isActive ? <Badge status="processing" /> : ''}
+          </Title>
+        }
+        bordered column={1}
+      >
         <Descriptions.Item label="Name">
           {profileInfo?.name}
         </Descriptions.Item>
@@ -54,8 +50,16 @@ export const Profile = () => {
           {profileInfo?.status.name}
         </Descriptions.Item>
         <Descriptions.Item label="Roles">
-          {profileInfo?.roles.map((item, index) => <Descriptions.Item key={index}><Badge status="success" text={item.name} /><br /></Descriptions.Item>
-          )}
+          {
+            profileInfo
+              ?.roles
+              .map((item, index) => {
+                return (
+                  <Descriptions.Item key={index}>
+                    <Badge status="success" text={item.name} /><br />
+                  </Descriptions.Item>)
+              })
+          }
         </Descriptions.Item>
         <Descriptions.Item label="Profile created at">
           {dateFormatter(profileInfo?.createdAt)}
@@ -71,5 +75,10 @@ export const Profile = () => {
 const styles = {
   wrapper: {
     maxWidth: '1000px'
+  },
+  descriptionTitle: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px'
   }
 }

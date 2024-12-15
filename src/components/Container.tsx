@@ -8,8 +8,7 @@ interface Props {
 
 export const Container = ({ children, style }: Props) => {
     return (
-        <div
-            style={{...styles.container, ...style}}>
+        <div style={{ ...styles.container, ...style }}>
             {children}
         </div>
     )
@@ -21,7 +20,7 @@ const styles: StyleSheet = {
         flexDirection: 'column',
         minHeight: 'calc(100vh - 128px)',
         padding: '40px 20px',
-        gap: 40, 
+        gap: 40,
         width: '100%'
     }
 }

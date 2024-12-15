@@ -1,6 +1,7 @@
 import React from 'react'
 import { AddButton } from './AddButton'
 import { Typography } from 'antd'
+import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
 
@@ -12,21 +13,14 @@ interface Props {
 
 export const TitleContainerWithAddButton = ({ title, buttonTitle, routeTo }: Props) => {
   return (
-    <div
-      style={styles.titleContainer}
-    >
-      <Title
-        level={2}
-        style={{
-          marginBottom: 0
-        }}
-      >{title}</Title>
+    <div style={styles.titleContainer}>
+      <Title level={2} style={styles.title}>{title}</Title>
       <AddButton title={buttonTitle} routeTo={routeTo} />
     </div>
   )
 }
 
-const styles = {
+const styles: StyleSheet = {
   titleContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -34,5 +28,8 @@ const styles = {
     gap: 5,
     width: '100%',
     maxWidth: '880px'
+  },
+  title: {
+    marginBottom: 0
   }
 }

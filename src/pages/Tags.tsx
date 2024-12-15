@@ -1,4 +1,5 @@
 import { Typography } from 'antd'
+import { Container } from 'src/components'
 
 const { Title, Text } = Typography
 export type Tag = {
@@ -62,19 +63,11 @@ export const Tags = () => {
     }
   ]
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: 'calc(100vh - 128px)'
-      }}
-    >
+    <Container>
       <Title level={2} >Tags</Title>
       <Text>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore magnam vel facilis a debitis perferendis consequatur doloremque blanditiis, vitae, ut consectetur omnis. Nam ullam sint, odio accusantium rem velit dolor amet laborum.
       </Text>
-    </div>
+    </Container>
   )
 }

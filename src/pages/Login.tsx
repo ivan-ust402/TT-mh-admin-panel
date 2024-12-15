@@ -2,8 +2,11 @@ import { Alert, Button, Form, Input, Typography } from 'antd'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Container } from 'src/components'
 import { useAuth } from 'src/hooks/useAuth'
 import { loginRequest } from 'src/store/auth/authActions'
+import { StyleSheet } from 'src/utils'
+import { handleResponseError } from 'src/utils/error'
 
 const { Title } = Typography
 
@@ -27,21 +30,13 @@ export const Login = () => {
     dispatch(loginRequest(values));
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const onFinishFailed = (errorInfo: unknown) => {
+    const message = handleResponseError(errorInfo, 'something went wrong!')
+    console.log('Failed:', message);
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: 'calc(100vh - 128px)'
-
-      }}
-    >
+    <Container style={styles.wrapper}>
       <Title level={2}>Log in</Title>
       <Form
         name="basic"
@@ -51,11 +46,8 @@ export const Login = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        style={{
-          position: 'relative'
-        }}
+        style={styles.form}
       >
-
         <Form.Item
           label="Email"
           name="email"
@@ -64,7 +56,6 @@ export const Login = () => {
         >
           <Input />
         </Form.Item>
-
         <Form.Item
           label="Password"
           name="password"
@@ -73,7 +64,6 @@ export const Login = () => {
         >
           <Input.Password />
         </Form.Item>
-
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button
             type="primary"
@@ -89,16 +79,26 @@ export const Login = () => {
               message={error}
               type="error"
               showIcon
-              style={{
-                position: 'absolute',
-                right: 0,
-                width: '100%'
-
-              }}
+              style={styles.alertError}
             />
             : ''
         }
       </Form>
-    </div>
+    </Container>
   )
+}
+
+const styles: StyleSheet = {
+  wrapper: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  form: {
+    position: 'relative'
+  },
+  alertError: {
+    position: 'absolute',
+    right: 0,
+    width: '100%'
+  }
 }

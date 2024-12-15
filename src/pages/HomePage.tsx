@@ -1,41 +1,37 @@
 import { Typography } from 'antd'
 import { useAuth } from 'src/hooks/useAuth'
 import { Link } from 'react-router-dom'
+import { Container } from 'src/components'
+import { StyleSheet } from 'src/utils'
 
 const { Title, Text } = Typography
 
 export const HomePage = () => {
   const { isAuth, userName } = useAuth()
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: 'calc(100vh - 128px)'
-      }}
-    >
+    <Container style={styles.wrapper}>
       {
         isAuth
           ? <Title level={2}>Welcome {userName ? userName : ''} in your account!</Title>
           : <>
-            <Title level={2}>
-              Welcome in our App!
-            </Title>
+            <Title level={2}>Welcome in our App!</Title>
             <Text>
               To use the functionality,&nbsp;
-              <Link to="/login"
-                style={{
-                  textDecoration: 'underline',
-                  color: 'inherit'
-                }}
-              >
-                log in
-              </Link>
+              <Link to="/login" style={styles.loginLink}>log in</Link>
             </Text>
           </>
       }
-    </div>
+    </Container>
   )
+}
+
+const styles: StyleSheet = {
+  wrapper: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loginLink: {
+    textDecoration: 'underline',
+    color: 'inherit'
+  }
 }
