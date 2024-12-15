@@ -1,7 +1,5 @@
 import { Tag } from 'src/api/tagsApi';
 
-
-
 export const GET_TAGS_REQUEST = 'GET_TAGS_REQUEST'
 export const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS'
 export const GET_TAGS_FAILURE = 'GET_TAGS_FAILURE'

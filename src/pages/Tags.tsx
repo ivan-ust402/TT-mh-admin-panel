@@ -12,14 +12,9 @@ export const Tags = () => {
   const dispatch = useDispatch()
   const {tags, loading, error} = useAppSelector(state => state.tags)
   const location = useLocation()
-  // const navigate = useNavigate()
 
-  console.log(tags)
   const editTagHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    // navigate(`edit/${id}`, {
-    //   state: location
-    // })
     alert(`EDIT tag ID = ${id}!`)
   }
   const deleteTagHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {

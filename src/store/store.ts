@@ -11,6 +11,8 @@ import postDetailsReducer from './postDetails/postReducer';
 import { postDetailsWatcher } from './postDetails/postSaga';
 import tagsReducer from './tags/tagsReducer';
 import { tagsWatcher } from './tags/tagsSaga';
+import authorsReducer from './authors/authorsReducer';
+import { authorsWatcher } from './authors/authorsSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,7 +21,8 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   posts: postsReducer,
   postDetails: postDetailsReducer,
-  tags: tagsReducer
+  tags: tagsReducer,
+  authors: authorsReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -30,7 +33,8 @@ function* rootSagas() {
     profileWatcher(),
     postsWatcher(),
     postDetailsWatcher(),
-    tagsWatcher()
+    tagsWatcher(),
+    authorsWatcher()
   ])
 }
 

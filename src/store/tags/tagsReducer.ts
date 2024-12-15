@@ -19,7 +19,6 @@ const tagsReducer = (state = initialState, action: GetTagsActionTypes): TagsStat
     case GET_TAGS_REQUEST:
       return { ...state, loading: true, error: null }
     case GET_TAGS_SUCCESS:
-      console.log('Reducer', action.payload)
       return { ...state, ...action.payload, loading: false, error: null  }
     case GET_TAGS_FAILURE:
         return { ...state, loading: false, error: action.payload }
