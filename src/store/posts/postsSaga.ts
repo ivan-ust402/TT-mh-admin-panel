@@ -9,7 +9,7 @@ import { AxiosResponse } from 'axios';
 function* getPostsSaga(action: GetPostsRequestAction) {
   try {
     const response: AxiosResponse<Post[]> = yield call(getPosts, action.payload)
-    yield makeDelay(500)
+    yield makeDelay(300)
     yield put(getPostsSuccess({
       posts: response.data,
       currentPage: Number(response.headers['x-pagination-current-page']) || 0,

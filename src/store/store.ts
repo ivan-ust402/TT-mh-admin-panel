@@ -7,13 +7,16 @@ import { profileWatcher } from './profile/profileSaga';
 import profileReducer from './profile/profileReducer';
 import { postsWatcher } from './posts/postsSaga';
 import postsReducer from './posts/postsReducer';
+import postDetailsReducer from './postDetails/postReducer';
+import { postDetailsWatcher } from './postDetails/postSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   auth: authReducer,
   profile: profileReducer,
-  posts: postsReducer
+  posts: postsReducer,
+  postDetails: postDetailsReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -22,7 +25,8 @@ function* rootSagas() {
   yield all([
     authWatcher(),
     profileWatcher(),
-    postsWatcher()
+    postsWatcher(),
+    postDetailsWatcher()
   ])
 }
 

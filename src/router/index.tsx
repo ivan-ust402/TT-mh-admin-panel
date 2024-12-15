@@ -4,6 +4,7 @@ import { RequiredAuth } from 'src/hoc/RequiredAuth';
 import { Authors, HomePage, Login, NotFoundPage, PostDetails, Posts, Profile, Tags } from 'src/pages';
 import { PostEdit } from 'src/pages/PostEdit';
 import { PostAdd } from 'src/pages/PostAdd';
+import { RequiredSearchParams } from 'src/hoc';
 
 
 export const router = createBrowserRouter(
@@ -22,7 +23,7 @@ export const router = createBrowserRouter(
         }
       />
       <Route
-        path="posts"
+        path="posts/:page?"
         element={
           <RequiredAuth>
             <Posts />
@@ -30,15 +31,7 @@ export const router = createBrowserRouter(
         }
       />
       <Route
-        path="posts/:id"
-        element={
-          <RequiredAuth>
-            <PostDetails />
-          </RequiredAuth>
-        }
-      />
-      <Route
-        path="posts/:id/edit"
+        path="posts/edit/:id"
         element={
           <RequiredAuth>
             <PostEdit />
@@ -46,10 +39,12 @@ export const router = createBrowserRouter(
         }
       />
       <Route
-        path="posts/:_page?"
+        path="posts/detail/:id?"
         element={
           <RequiredAuth>
-            <Posts />
+            <RequiredSearchParams>
+              <PostDetails />
+            </RequiredSearchParams>
           </RequiredAuth>
         }
       />

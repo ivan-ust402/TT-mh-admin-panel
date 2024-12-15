@@ -7,8 +7,6 @@ import { useAppSelector } from 'src/hooks/redux-hooks'
 import { getPostsRequest } from 'src/store/posts/postsActions'
 import { StyleSheet } from 'src/utils'
 
-
-
 export const Posts = () => {
   const dispatch = useDispatch()
   const { error, loading, totalPostsCount, postsPerPage, posts } = useAppSelector(state => state.posts)
@@ -20,7 +18,7 @@ export const Posts = () => {
 
   const editPostHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    navigate(`/posts/${id}/edit`, {
+    navigate(`edit/${id}`, {
       state: location
     })
   }
@@ -38,6 +36,7 @@ export const Posts = () => {
     dispatch(getPostsRequest(searchPage))
   }, [dispatch, searchPage])
 
+
   if (loading) { return <LoaderAlert /> }
   if (error) { return <ErrorAlert error={error} /> }
 
@@ -50,7 +49,7 @@ export const Posts = () => {
       >
         {posts?.map((post, index) => (
           <Col key={index}>
-            <Link to={`${post.id}`} state={location}>
+            <Link to={`detail?id=${post.id}`} state={location}>
               <CardPost
                 post={post}
                 editPost={editPostHandler}

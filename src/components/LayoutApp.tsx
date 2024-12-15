@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { logoutRequest } from 'src/store/auth/authActions'
 import { StyleSheet } from 'src/utils'
 import { SidebarApp } from './SidebarApp'
+import { checkMenuKey } from 'src/utils/menu'
 
 const { Header, Footer, Content } = Layout
 
@@ -17,7 +18,7 @@ export const LayoutApp = () => {
   const dispatch = useDispatch()
   const fromPage = location.state?.from?.pathname || '/'
   const initialMenuKey = location.pathname.split('').splice(1).join('')
-  const [selectedKey, setSelectedKey] = useState<string>(initialMenuKey)
+  const [selectedKey, setSelectedKey] = useState<string>(checkMenuKey(initialMenuKey) ? initialMenuKey : '')
 
   const handleLogOut = () => {
     dispatch(logoutRequest());
@@ -33,10 +34,10 @@ export const LayoutApp = () => {
   }
 
   useEffect(() => {
-    if (!isAuth) {
+    if ( !isAuth || !checkMenuKey(initialMenuKey)) {
       setSelectedKey('')
     }
-  }, [isAuth])
+  }, [initialMenuKey, isAuth])
   return (
     <Layout style={styles.layout}>
       <Header style={styles.header}>
