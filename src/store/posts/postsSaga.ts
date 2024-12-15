@@ -14,7 +14,7 @@ function* getPostsSaga(action: GetPostsRequestAction) {
     yield makeDelay(500)
     yield put(getPostsParamsSuccess(response.headers))
     yield put(getPostsSuccess(response.data))
-
+    console.log('fetchPosts')
   } catch (error) {
     const message = handleSagaError(error, 'Posts request failed')
     yield put(getPostsFailure(message))

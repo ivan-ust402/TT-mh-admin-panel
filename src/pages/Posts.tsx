@@ -16,16 +16,15 @@ export const Posts = () => {
   const dispatch = useDispatch()
   const { error, loading, params, posts } = useAppSelector(state => state.posts)
   const location = useLocation()
-  console.log(location)
   const navigate = useNavigate()
   const searchParams = new URLSearchParams(location.search)
-  const searchPage = Number(searchParams.get('_page'))
+  const searchPage = Number(searchParams.get('page'))
 
   const [currentPage, setCurrentPage] = useState(params?.currentPage || searchPage || 0)
   const [pageCount, setPageCount] = useState(params?.pageCount || 0)
   const [totalPosts, setTotalPosts] = useState(params?.totalPostsCount || 0)
 
-
+  console.log('1')
   const editPostHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
     navigate(`/posts/${id}/edit`, {
@@ -39,38 +38,22 @@ export const Posts = () => {
 
   const changePageHandler = (page: number
   ) => {
-    if (page > pageCount) {
-      setCurrentPage(pageCount);
-      searchParams.set('_page', pageCount.toString())
-      navigate(`${location.pathname}?${searchParams.toString()}`)
-    } else if (page < 0 && pageCount > 0) {
-      setCurrentPage(pageCount);
-      searchParams.set('_page', '1')
-      navigate(`${location.pathname}?${searchParams.toString()}`)
-    } else if (page < 0 && pageCount === 0) {
-      navigate('/404')
-    } else {
-      setCurrentPage(page);
-      searchParams.set('_page', page.toString())
-      navigate(`${location.pathname}?${searchParams.toString()}`)
-    }
-
+    setCurrentPage(page);
+    searchParams.set('page', page.toString())
+    navigate(`${location.pathname}?${searchParams.toString()}`)
   }
 
   useEffect(() => {
+    let targetPage = currentPage
     if (currentPage > pageCount) {
-      dispatch(getPostsRequest(pageCount))
-      searchParams.set('_page', pageCount.toString())
-      navigate(`${location.pathname}?${searchParams.toString()}`)
-    } else if (currentPage < 0 && pageCount > 0) {
-      dispatch(getPostsRequest(1))
-      searchParams.set('_page', '1')
-      navigate(`${location.pathname}?${searchParams.toString()}`)
-    } else if (currentPage < 0 && pageCount === 0) {
-      navigate('/notfound')
-    } else {
-      dispatch(getPostsRequest(currentPage))
+      targetPage = pageCount
     }
+    if (currentPage < 0 && pageCount > 0) {
+      targetPage = 1
+    }
+    navigate(`${location.pathname}?page=${targetPage}`)
+    console.log('2')
+    dispatch(getPostsRequest(currentPage))
   }, [dispatch, currentPage, pageCount])
 
   useEffect(() => {
@@ -80,9 +63,8 @@ export const Posts = () => {
     if (params && params.pageCount) {
       setPageCount(params.pageCount)
     }
+    console.log('3')
   }, [params])
-
-
 
   if (loading) {
     return (
@@ -152,7 +134,7 @@ export const Posts = () => {
       <Pagination
         current={currentPage}
         total={totalPosts}
-        pageSize={params?.postsPerPage || 9}
+        pageSize={params?.postsPerPage || 0}
         onChange={changePageHandler} />
     </Container >
   )

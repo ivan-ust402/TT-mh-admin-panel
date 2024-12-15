@@ -58,6 +58,7 @@ export const makeRequest = async (url: string, method: 'GET' | 'POST' | 'PUT' | 
     method,
     data
   });
+  console.log('makeRequest')
   return response;
 }
 
