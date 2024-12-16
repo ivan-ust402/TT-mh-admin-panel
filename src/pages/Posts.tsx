@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { CardPost, Container, ErrorAlert, LoaderAlert, TitleContainerWithAddButton } from 'src/components'
 import { useAppSelector } from 'src/hooks/redux-hooks'
-import { getPostsRequest } from 'src/store/posts/postsActions'
+import { deletePostRequest, getPostsRequest } from 'src/store/posts/postsActions'
 import { StyleSheet } from 'src/utils'
 
 export const Posts = () => {
@@ -24,7 +24,7 @@ export const Posts = () => {
   }
   const deletePostHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    alert(`DELETE post ID = ${id}!`)
+    dispatch(deletePostRequest(id))
   }
 
   const changePageHandler = (page: number

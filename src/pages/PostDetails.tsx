@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { Container, ErrorAlert, LoaderAlert } from 'src/components'
 import { useAppSelector } from 'src/hooks/redux-hooks'
-import { getPostDetailsRequest } from 'src/store/postDetails/postActions'
+import { getPostDetailsRequest } from 'src/store/posts/postsActions'
 import { dateFormatter, StyleSheet } from 'src/utils'
 
 const { Title } = Typography
@@ -16,7 +16,7 @@ export const PostDetails = () => {
   const searchParams = new URLSearchParams(location.search);
   const idParam = Number(searchParams.get('id'));
 
-  const { post, loading, error } = useAppSelector(state => state.postDetails)
+  const { post, loading, error } = useAppSelector(state => state.posts)
 
   useEffect(() => {
     dispatch(getPostDetailsRequest(idParam))
@@ -27,7 +27,7 @@ export const PostDetails = () => {
 
   return (
     <Container style={styles.wrapper}>
-      <Descriptions title={<Title level={2} style={styles.title}>Post Details</Title>} bordered column={1} >
+      <Descriptions title={<Title level={2} style={styles.title}>Post</Title>} bordered column={1} >
         <Descriptions.Item label="Preview picture">
           <img
             alt="card cover"

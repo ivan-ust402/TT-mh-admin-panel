@@ -15,11 +15,13 @@ export const Authors = () => {
 
   const editAuthorHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    alert(`EDIT author ID = ${id}!`)
+    alert(`PLACEHOLDER! EDIT author ID = ${id}! 
+This functionality is under development.`)
   }
   const deleteAuthorHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    alert(`DELETE author ID = ${id}!`)
+    alert(`PLACEHOLDER! DELETE author ID = ${id}! 
+This functionality is under development.`)
   }
 
   useEffect(() => {

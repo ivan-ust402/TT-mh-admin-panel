@@ -15,11 +15,13 @@ export const Tags = () => {
 
   const editTagHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    alert(`EDIT tag ID = ${id}!`)
+    alert(`PLACEHOLDER! EDIT tag ID = ${id}! 
+This functionality is under development.`)
   }
   const deleteTagHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    alert(`DELETE tag ID = ${id}!`)
+    alert(`PLACEHOLDER! DELETE tag ID = ${id}!
+This functionality is under development.`)
   }
 
   useEffect(() => {

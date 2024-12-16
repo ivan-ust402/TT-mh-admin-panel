@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { Container, ErrorAlert, LoaderAlert } from 'src/components'
 import { useAppSelector } from 'src/hooks/redux-hooks'
-import { getAuthorDetailsRequest } from 'src/store/authorDetails/authorActions'
+import { getAuthorDetailsRequest } from 'src/store/authors/authorsActions'
 import { dateFormatter, StyleSheet } from 'src/utils'
 
 const { Title } = Typography
@@ -15,7 +15,7 @@ export const AuthorDetails = () => {
   const searchParams = new URLSearchParams(location.search);
   const idParam = Number(searchParams.get('id'));
 
-  const { author, loading, error } = useAppSelector(state => state.author)
+  const { author, loading, error } = useAppSelector(state => state.authors)
 
   useEffect(() => {
     dispatch(getAuthorDetailsRequest(idParam))
@@ -26,7 +26,7 @@ export const AuthorDetails = () => {
 
   return (
     <Container style={styles.wrapper}>
-      <Descriptions title={<Title level={2} style={styles.title}>Author Details</Title>} bordered column={1} >
+      <Descriptions title={<Title level={2} style={styles.title}>Author</Title>} bordered column={1} >
         <Descriptions.Item label="Avatar">
           <img
             alt="author's avatar"

@@ -1,10 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import { AuthRequestBody, LoginResponse } from 'src/api/authApi';
+import { LoginResponse } from 'src/api/authApi';
 import { logoutRequest } from 'src/store/auth/authActions';
 import { store } from 'src/store/store';
 import { getAccessToken, getAccessTokenExpiredAt, getRefreshToken, getRefreshTokenExpiredAt, isTokenExpired, setAuthCookies } from 'src/utils/cookies';
-
-type RequestBody = AuthRequestBody
 
 export const axiosInstance = axios.create({
   baseURL: 'https://rest-test.machineheads.ru',
@@ -52,7 +50,7 @@ const checkIfTokenExpired = async () => {
 }
 
 
-export const makeRequest = async (url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: RequestBody) => {
+export const makeRequest = async (url: string, method: 'GET' | 'POST' | 'PUT' | 'DELETE', data?: FormData) => {
   await checkIfTokenExpired()
   const response = await axiosInstance({
     url,

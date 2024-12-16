@@ -10,7 +10,13 @@ export interface Tag {
   updatedAt: string
 }
 
+
 export const getTags = async (): Promise<AxiosResponse<Tag[]>> => {
   const response = await makeRequest('/manage/tags', 'GET')
+  return response;
+}
+
+export const getTag = async (id: number): Promise<AxiosResponse<Tag>> => {
+  const response = await makeRequest(`/manage/tags/detail?id=${id}`, 'GET')
   return response;
 }

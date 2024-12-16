@@ -1,13 +1,15 @@
 import { Typography } from 'antd'
+import { useDispatch } from 'react-redux'
 import { Container, PostEditForm, PostEditFormValues } from 'src/components'
+import { addPostRequest } from 'src/store/posts/postsActions'
 import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
 
 export const PostAdd = () => {
+  const dispatch = useDispatch()
   const onFinish = (values: PostEditFormValues) => {
-    // api addPost
-    console.log(values);
+    dispatch(addPostRequest(values))
   };
 
   return (

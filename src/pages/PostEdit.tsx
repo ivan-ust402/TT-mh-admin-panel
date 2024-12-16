@@ -2,24 +2,32 @@ import { Typography } from 'antd'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { PostDetails } from 'src/api/postsApi'
 import { Container, ErrorAlert, LoaderAlert, PostEditForm, PostEditFormValues } from 'src/components'
 import { useAppSelector } from 'src/hooks/redux-hooks'
-import { getPostDetailsRequest } from 'src/store/postDetails/postActions'
+import { editPostRequest, getPostDetailsRequest } from 'src/store/posts/postsActions'
 import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
 
+const normalizePost = (post: PostDetails) => ({
+    authorId: post.author.id,
+    code: post.code,
+    previewPicture: post.previewPicture.url,
+    tagIds: post.tags.map(item => item.id),
+    text: post.text,
+    title: post.title
+})
+
 export const PostEdit = () => {
   const dispatch = useDispatch()
-  const {post, loading, error} = useAppSelector(state => state.postDetails)
+  const {post, loading, error} = useAppSelector(state => state.posts)
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search);
   const idParam = Number(searchParams.get('id'));
-  console.log(location)
 
   const onFinish = (values: PostEditFormValues) => {
-    // api editPost
-    console.log(values);
+    dispatch(editPostRequest({ id: idParam, post: values } ))
   };
 
   useEffect(() => {
@@ -32,7 +40,7 @@ export const PostEdit = () => {
   return (
     <Container style={styles.wrapper}>
       <Title level={2}>Edit Post</Title>
-      {post && <PostEditForm onFinish={onFinish} initialValues={post} />}
+      {post && <PostEditForm onFinish={onFinish} initialValues={normalizePost(post)} isEdit />}
     </Container>
   )
 }

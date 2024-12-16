@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { Container, ErrorAlert, LoaderAlert } from 'src/components'
 import { useAppSelector } from 'src/hooks/redux-hooks'
-import { getTagDetailsRequest } from 'src/store/tagDetails/tagActions'
+import { getTagDetailsRequest } from 'src/store/tags/tagsActions'
 import { dateFormatter, StyleSheet } from 'src/utils'
 
 const { Title } = Typography
@@ -16,7 +16,7 @@ export const TagDetails = () => {
   const searchParams = new URLSearchParams(location.search);
   const idParam = Number(searchParams.get('id'));
 
-  const { tag, loading, error } = useAppSelector(state => state.tagDetails)
+  const { tag, loading, error } = useAppSelector(state => state.tags)
 
   useEffect(() => {
     dispatch(getTagDetailsRequest(idParam))
