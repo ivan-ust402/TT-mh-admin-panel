@@ -119,7 +119,14 @@ export const PostEditForm = ({ onFinish, initialValues, isEdit }: Props) => {
     
 
     return (
-        <Form {...layout} layout='vertical' name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={initialValues}>
+        <Form 
+            {...layout} 
+            layout='vertical' 
+            name="nest-messages" 
+            onFinish={onFinish} 
+            validateMessages={validateMessages} 
+            initialValues={initialValues}
+        >
             <Form.Item name={'title'} label="Title:" rules={[{ required: !isEdit }]}>
                 <Input />
             </Form.Item>
