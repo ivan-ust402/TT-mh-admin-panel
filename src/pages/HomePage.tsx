@@ -14,7 +14,7 @@ export const HomePage = () => {
     <Container style={styles.wrapper}>
       {
         isAuth
-          ? <Title level={2}>Welcome {profile?.name ? profile.name : ''} in your account!</Title>
+          ? <Title level={2}>{profile?.name ? `${profile.name}, w` : 'W'}elcome to your account!</Title>
           : <>
             <Title level={2}>Welcome in our App!</Title>
             <Text>
