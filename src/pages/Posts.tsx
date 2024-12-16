@@ -18,7 +18,7 @@ export const Posts = () => {
 
   const editPostHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    navigate(`edit/${id}`, {
+    navigate(`edit?id=${id}`, {
       state: location
     })
   }

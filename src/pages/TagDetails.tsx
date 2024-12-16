@@ -70,7 +70,10 @@ export const TagDetails = () => {
 //     gap: '10px'
 //   },
 //   image: {
-//     height: 200,
+//     maxHeight: 200,
+    // height: '100%',
+    // width: '100%',
+    // maxWidth: 200,
 //     objectFit: 'cover'
 //   }
 // }

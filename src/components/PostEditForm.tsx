@@ -1,19 +1,24 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Select, Upload } from 'antd'
-import { Tag } from 'src/api/tagsApi'
 
 import { StyleSheet } from 'src/utils'
-import { Author } from './CardAuthor'
+import { PostDetails } from 'src/api/postApi'
+import { useDispatch } from 'react-redux'
+import { useAppSelector } from 'src/hooks/redux-hooks'
+import { useEffect } from 'react'
+import { getTagsRequest } from 'src/store/tags/tagsActions'
+import { getAuthorsRequest } from 'src/store/authors/authorsActions'
 
 interface Props {
-    initialValues?: PostEditFormValues,
+    initialValues?: PostDetails,
     onFinish: (values: PostEditFormValues) => void
 }
 
 export interface PostEditFormValues {
     authorId: number,
     code: string,
-    previewPicture: string,
+    id: number,
+    previewPicture: File,
     tagIds: number[]
     text: string
     title: string
@@ -27,115 +32,65 @@ const validateMessages = {
     required: '${label} is required!'
 }
 
-const authors: Author[] = [
-    {
-        id: 2,
-        name: 'Иван',
-        lastName: 'Иванов',
-        secondName: 'Иванович',
-        avatar: {
-            id: 2,
-            name: '4176_1191689844.gif',
-            url: 'http://static-test.machineheads.ru/upload/author-avatars/a45/41761191689844.gif'
-        },
-        updatedAt: '2021-05-27T08:25:58+03:00',
-        createdAt: '2021-05-27T08:25:58+03:00'
-    },
-    {
-        id: 5,
-        name: 'Пётр',
-        lastName: 'Петров',
-        secondName: 'Петрович',
-        avatar: {
-            id: 104,
-            name: 'linux.jpg',
-            url: 'http://static-test.machineheads.ru/upload/author-avatars/fab/linux.jpg'
-        },
-        updatedAt: '2023-03-07T07:52:50+03:00',
-        createdAt: '2023-03-07T07:51:46+03:00'
-    },
-    {
-        id: 1,
-        name: 'Сергей',
-        lastName: 'Сергеев',
-        secondName: 'Сергеевич',
-        avatar: {
-            id: 1,
-            name: '4176_1191689844.gif',
-            url: 'http://static-test.machineheads.ru/upload/author-avatars/781/41761191689844.gif'
-        },
-        updatedAt: '2021-05-27T08:25:23+03:00',
-        createdAt: '2021-05-27T08:25:23+03:00'
-    }
-]
-
-const tags: Tag[] = [
-    {
-        id: 4,
-        name: 'Басня',
-        code: 'basna',
-        sort: null,
-        updatedAt: '2021-05-27T08:26:37+03:00',
-        createdAt: '2021-05-27T08:26:37+03:00'
-    },
-    {
-        id: 3,
-        name: 'Песня',
-        code: 'pesna',
-        sort: null,
-        updatedAt: '2021-05-27T08:26:33+03:00',
-        createdAt: '2021-05-27T08:26:33+03:00'
-    },
-    {
-        id: 2,
-        name: 'Проза',
-        code: 'proza',
-        sort: null,
-        updatedAt: '2021-05-27T08:26:25+03:00',
-        createdAt: '2021-05-27T08:26:25+03:00'
-    },
-    {
-        id: 5,
-        name: 'Смешные',
-        code: 'smesnye',
-        sort: null,
-        updatedAt: '2021-05-27T08:26:43+03:00',
-        createdAt: '2021-05-27T08:26:43+03:00'
-    },
-    {
-        id: 1,
-        name: 'Стихи',
-        code: 'stihi',
-        sort: null,
-        updatedAt: '2021-05-27T08:26:20+03:00',
-        createdAt: '2021-05-27T08:26:20+03:00'
-    },
-    {
-        id: 6,
-        name: 'Страшные',
-        code: 'strasnye',
-        sort: null,
-        updatedAt: '2021-05-27T08:26:57+03:00',
-        createdAt: '2021-05-27T08:26:57+03:00'
-}]
-
 
 export const PostEditForm = ({ onFinish, initialValues }: Props) => {
+    const dispatch = useDispatch()
+
+    const { authors } = useAppSelector(state => state.authors)
+    const { tags } = useAppSelector(state => state.tags)
+
     const handleChange = (value: string[]) => {
         console.log(`selected ${value}`);
     };
 
+    useEffect(() => {
+        dispatch(getTagsRequest())
+        dispatch(getAuthorsRequest())
+    }, [dispatch])
+    console.log(initialValues)
+
     return (
         <Form {...layout} layout='vertical' name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} initialValues={initialValues}>
-            <Form.Item name={'code'} label="Code:" rules={[{ required: true }]}>
-                <Input />
-            </Form.Item>
+            {/* 
+            export interface PostDetails {
+  author: {
+    avatar: {
+      id: number,
+      name: string,
+      url: string
+    },
+    fullName: string,
+    id: number
+  },
+  code: string,
+  createdAt: string,
+  id: number,
+  previewPicture: {
+    id: number,
+    name: string,
+    url: string
+  },
+  tags: [
+    {
+      code: string,
+      id: number,
+      name: string
+    }
+  ],
+  text: string,
+  title: string,
+  updatedAt: string
+}
+            */}
             <Form.Item name={'title'} label="Title:" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
+            <Form.Item name={'code'} label="Code:" rules={[{ required: true }]}>
+                <Input />
+            </Form.Item>
             <Form.Item name={'authorId'} label="Author:" rules={[{ required: true }]}>
-                <Select>
-                    {authors.map(author => (
+                <Select defaultValue={initialValues?.author.fullName}>
+                    {authors?.map(author => (
                         <Select.Option value={author.id} key={author.id}>{author.name} {author.lastName}</Select.Option>
                     ))}
                 </Select>
@@ -146,9 +101,9 @@ export const PostEditForm = ({ onFinish, initialValues }: Props) => {
                     allowClear
                     style={styles.selectTags}
                     placeholder="Please select"
-                    // defaultValue={[]}
+                    defaultValue={initialValues?.tags.map(tag => tag.name)}
                     onChange={handleChange}
-                    options={tags.map(tag => {
+                    options={tags?.map(tag => {
                         return {
                             label: tag.name,
                             value: tag.id
@@ -165,7 +120,7 @@ export const PostEditForm = ({ onFinish, initialValues }: Props) => {
                     listType="picture-card"
                     maxCount={1}
                     fileList={[]}
-                >
+                >   
                     <div>
                         <PlusOutlined />
                         <div style={styles.uploadLabel}>Upload</div>
@@ -183,9 +138,9 @@ export const PostEditForm = ({ onFinish, initialValues }: Props) => {
 
 const styles: StyleSheet = {
     uploadLabel: {
-        marginTop: 8 
+        marginTop: 8
     },
-    selectTags: { 
-        width: '100%' 
+    selectTags: {
+        width: '100%'
     }
 }

@@ -31,10 +31,12 @@ export const router = createBrowserRouter(
         }
       />
       <Route
-        path="posts/edit/:id"
+        path="posts/edit/:id?"
         element={
           <RequiredAuth>
-            <PostEdit />
+            <RequiredSearchParams>
+              <PostEdit />
+            </RequiredSearchParams>
           </RequiredAuth>
         }
       />

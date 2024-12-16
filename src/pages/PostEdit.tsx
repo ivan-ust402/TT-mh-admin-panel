@@ -1,36 +1,38 @@
 import { Typography } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { Container, PostEditForm, PostEditFormValues } from 'src/components'
+import { Container, ErrorAlert, LoaderAlert, PostEditForm, PostEditFormValues } from 'src/components'
+import { useAppSelector } from 'src/hooks/redux-hooks'
+import { getPostDetailsRequest } from 'src/store/postDetails/postActions'
 import { StyleSheet } from 'src/utils'
 
 const { Title } = Typography
 
-// type Props = {}
-
 export const PostEdit = () => {
+  const dispatch = useDispatch()
+  const {post, loading, error} = useAppSelector(state => state.postDetails)
   const location = useLocation()
-  console.log(location.state)
-  // const params = useParams()
-
-  const post = {
-    code: 'code',
-    title: 'title',
-    authorId: 1,
-    tagIds: [1, 2],
-    text: 'text',
-    previewPicture: 'previewPicture'
-  }
+  const searchParams = new URLSearchParams(location.search);
+  const idParam = Number(searchParams.get('id'));
+  console.log(location)
 
   const onFinish = (values: PostEditFormValues) => {
     // api editPost
     console.log(values);
   };
 
+  useEffect(() => {
+    dispatch(getPostDetailsRequest(idParam))
+  }, [dispatch, idParam])
+
+  if (loading) { return <LoaderAlert /> }
+  if (error) { return <ErrorAlert error={error} /> }
+
   return (
     <Container style={styles.wrapper}>
       <Title level={2}>Edit Post</Title>
-      <PostEditForm onFinish={onFinish} initialValues={post} />
+      {post && <PostEditForm onFinish={onFinish} initialValues={post} />}
     </Container>
   )
 }

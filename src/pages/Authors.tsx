@@ -12,13 +12,9 @@ export const Authors = () => {
   const dispatch = useDispatch()
   const { authors, loading, error } = useAppSelector(state => state.authors)
   const location = useLocation()
-  // const navigate = useNavigate()
 
   const editAuthorHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
     e.preventDefault()
-    // navigate(`edit/${id}`, {
-    //   state: location
-    // })
     alert(`EDIT author ID = ${id}!`)
   }
   const deleteAuthorHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: number) => {
