@@ -33,7 +33,7 @@ export const Tags = () => {
     <Container style={styles.wrapper}>
       <TitleContainerWithAddButton title='Tags' />
       <Row
-        gutter={[16, 34]}
+        gutter={[16, 16]}
         style={styles.row}
       >
         {tags?.map((tag, index) => (

@@ -48,7 +48,7 @@ export const CardTag = ({ tag, deleteTag, editTag }: Props) => {
 const styles: StyleSheet = {
   card: {
     width: 300,
-    height: 250,
+    height: 270,
     position: 'relative'
   },
   tagNamesContainer: {

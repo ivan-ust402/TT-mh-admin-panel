@@ -52,7 +52,7 @@ export const CardAuthor = ({ author, deleteAuthor, editAuthor }: Props) => {
 const styles: StyleSheet = {
   card: {
     width: 300,
-    height: 350,
+    height: 370,
     position: 'relative'
   },
   cardImg: {

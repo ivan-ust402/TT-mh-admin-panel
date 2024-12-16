@@ -33,7 +33,7 @@ export const Authors = () => {
     <Container style={styles.wrapper}>
       <TitleContainerWithAddButton title='Authors' />
       <Row
-        gutter={[30, 50]}
+        gutter={[30, 30]}
         style={styles.row}
       >
         {authors?.map((author, index) => (

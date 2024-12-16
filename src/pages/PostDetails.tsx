@@ -17,7 +17,6 @@ export const PostDetails = () => {
   const idParam = Number(searchParams.get('id'));
 
   const { post, loading, error } = useAppSelector(state => state.postDetails)
-  console.log(post)
 
   useEffect(() => {
     dispatch(getPostDetailsRequest(idParam))
@@ -28,7 +27,7 @@ export const PostDetails = () => {
 
   return (
     <Container style={styles.wrapper}>
-      <Descriptions title={<Title level={2} style={styles.title}>Post</Title>} bordered column={1} >
+      <Descriptions title={<Title level={2} style={styles.title}>Post Details</Title>} bordered column={1} >
         <Descriptions.Item label="Preview picture">
           <img
             alt="card cover"

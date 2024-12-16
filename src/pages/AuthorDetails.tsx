@@ -16,7 +16,6 @@ export const AuthorDetails = () => {
   const idParam = Number(searchParams.get('id'));
 
   const { author, loading, error } = useAppSelector(state => state.author)
-  console.log(author)
 
   useEffect(() => {
     dispatch(getAuthorDetailsRequest(idParam))
@@ -27,7 +26,7 @@ export const AuthorDetails = () => {
 
   return (
     <Container style={styles.wrapper}>
-      <Descriptions title={<Title level={2} style={styles.title}>Author</Title>} bordered column={1} >
+      <Descriptions title={<Title level={2} style={styles.title}>Author Details</Title>} bordered column={1} >
         <Descriptions.Item label="Avatar">
           <img
             alt="author's avatar"
